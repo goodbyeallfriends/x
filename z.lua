@@ -715,7 +715,7 @@ end
 	SearchBack.BackgroundColor3 = Color3.fromRGB(143, 131, 255)
 	SearchBack.BackgroundTransparency = 0.900
 	SearchBack.Position = UDim2.new(0, 15, 0.5, -15)
-	local AramaUzunluk = 0.744
+	local AramaUzunluk = 1
 	SearchBack.Size = UDim2.new(AramaUzunluk, -180, 0, 30)
     	
 	local SearchBackCorner = Instance.new("UICorner")

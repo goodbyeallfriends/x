@@ -1,7 +1,7 @@
 -- (WARNING: This Repository is Licensed! You are not permitted to use/copy this User Interface library)
 if not game:IsLoaded() then game.Loaded:wait() end
 if game.CoreGui:FindFirstChild("Vice") then game.CoreGui:FindFirstChild("Vice"):Destroy() end 
-if game.CoreGui:FindFirstChild("NotifsGui") then game.CoreGui:FindFirstChild("NotifsGui"):Destroy() end end
+if game.CoreGui:FindFirstChild("NotifsGui") then game.CoreGui:FindFirstChild("NotifsGui"):Destroy() end
 
 local RainbowVal2 = {RainbowColorValue=0,HueSelectionPosition=0}
 coroutine.wrap(function() while wait() do RainbowVal2.RainbowColorValue = RainbowVal2.RainbowColorValue + 1 / 255 RainbowVal2.HueSelectionPosition = RainbowVal2.HueSelectionPosition + 1 if RainbowVal2.RainbowColorValue >= 1 then RainbowVal2.RainbowColorValue = 0 end if RainbowVal2.HueSelectionPosition == 130 then RainbowVal2.HueSelectionPosition = 0 end end end)()

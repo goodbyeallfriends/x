@@ -9,6 +9,7 @@ if game.CoreGui:FindFirstChild("NotifsGui") then game.CoreGui:FindFirstChild("No
 local RainbowVal2 = {RainbowColorValue=0,HueSelectionPosition=0}
 coroutine.wrap(function() while wait() do RainbowVal2.RainbowColorValue = RainbowVal2.RainbowColorValue + 1 / 255 RainbowVal2.HueSelectionPosition = RainbowVal2.HueSelectionPosition + 1 if RainbowVal2.RainbowColorValue >= 1 then RainbowVal2.RainbowColorValue = 0 end if RainbowVal2.HueSelectionPosition == 130 then RainbowVal2.HueSelectionPosition = 0 end end end)()
 local UserInputService = game:GetService('UserInputService')
+local InputService = game:GetService('UserInputService')
 local TextService = game:GetService('TextService')
 local TweenService = game:GetService('TweenService')
 local CoreGui = game:GetService('CoreGui')

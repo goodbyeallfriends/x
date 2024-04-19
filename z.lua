@@ -1,4 +1,7 @@
 -- (WARNING: This Repository is Licensed! You are not permitted to use/copy this User Interface library)
+local Global = getgenv and getgenv() or _G;
+local LibraryFunctions = {Notifications = {}, Connections = {}, Flags = {}}
+
 if not game:IsLoaded() then game.Loaded:wait() end
 if game.CoreGui:FindFirstChild("Vice") then game.CoreGui:FindFirstChild("Vice"):Destroy() end 
 if game.CoreGui:FindFirstChild("NotifsGui") then game.CoreGui:FindFirstChild("NotifsGui"):Destroy() end
@@ -14,7 +17,6 @@ local LocalPlayer = game:GetService('Players').LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local RunService = game:GetService("RunService")
 
-local LibraryFunctions = {}
 local InputAliases = setmetatable({
 	One = "1",
 	Two = "2",
@@ -43,6 +45,52 @@ local InputAliases = setmetatable({
 		return string.upper(rawget(Self, Key) or Key)
 	end
 })
+
+function LibraryFunctions:Create(Class, Properties)
+	local Object = Instance.new(Class)
+
+	for Property, Value in next, Properties do
+		Object[Property] = Value
+	end
+
+	return Object
+end
+
+function LibraryFunctions:GetMouseLocation(Inset)
+	local Location = InputService:GetMouseLocation()
+
+	if not Inset then
+		Location -= Vector2.new(0, 36)
+	end
+
+	return Location
+end
+
+function LibraryFunctions:Connect(Signal, Function)
+	local Connection = Signal:Connect(Function)
+
+	table.insert(self.Connections, Connection)
+
+	return Connection
+end
+
+function LibraryFunctions:Hovering(Object)
+	local M = LibraryFunctions:GetMouseLocation()
+	local P = Object.AbsolutePosition
+	local S = Object.AbsoluteSize
+
+	return (M.X >= P.X and M.X <= P.X + S.X) and (M.Y >= P.Y and M.Y <= P.Y + S.Y)
+end
+
+function LibraryFunctions:Round(Number, Increment)
+	local Bracket = 1 / Increment
+
+	return math.round(Number * Bracket) / Bracket
+end
+
+function LibraryFunctions:Tween(Object, Properties, Time, ...)
+	TweenService:Create(Object, TweenInfo.new(Time, ...), Properties):Play()
+end
 
 
 local function GetMouseLocation(Inset)
@@ -1688,15 +1736,23 @@ end
 							end
 						end
 					end)
-					local function ConnectedFunction(input, _gameProcessed)
+					LibraryFunctions:Connect(InputService.InputBegan, function(Input)
 						if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.MouseButton2 then
-							if ColorpickerFrame.Visible and not Hovering(ColorpickerFrame) then --and not Hovering(self.Button) -- signal functions
+							if ColorpickerFrame.Visible and not LibraryFunctions:Hovering(ColorpickerFrame)and not LibraryFunctions:Hovering(self.Button) then
 								ColorpickerFrame.Visible = false
 							end
 						end
-					end
-				
-					UserInputService.InputBegan:Connect(ConnectedFunction)
+					end)
+
+					--local function ConnectedFunction(input, _gameProcessed)
+					--	if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.MouseButton2 then
+					--		if ColorpickerFrame.Visible and not Hovering(ColorpickerFrame) then --and not Hovering(self.Button) -- signal functions
+					--				ColorpickerFrame.Visible = false
+					--			end
+					--		end
+					--	end
+					--UserInputService.InputBegan:Connect(ConnectedFunction)
+
 					Colorpicker.MouseButton1Click:Connect(function()
 						if ColorPickerToggled == false then
 							ColorPickerToggled = not ColorPickerToggled

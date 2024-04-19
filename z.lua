@@ -1,24 +1,10 @@
 -- (WARNING: This Repository is Licensed! You are not permitted to use/copy this User Interface library)
-if not game:IsLoaded() then 
-game.Loaded:wait() 
-end
-local function DestroyOld() for x = 1,15 do
-    if game.CoreGui:FindFirstChild("Vice") then game.CoreGui:FindFirstChild("Vice"):Destroy() end 
-    if game.CoreGui:FindFirstChild("NotifsGui") then game.CoreGui:FindFirstChild("NotifsGui"):Destroy() end end
-end DestroyOld()
+if not game:IsLoaded() then game.Loaded:wait() end
+if game.CoreGui:FindFirstChild("Vice") then game.CoreGui:FindFirstChild("Vice"):Destroy() end 
+if game.CoreGui:FindFirstChild("NotifsGui") then game.CoreGui:FindFirstChild("NotifsGui"):Destroy() end end
+
 local RainbowVal2 = {RainbowColorValue=0,HueSelectionPosition=0}
-coroutine.wrap(function()
-        while wait() do
-            RainbowVal2.RainbowColorValue = RainbowVal2.RainbowColorValue + 1 / 255
-            RainbowVal2.HueSelectionPosition = RainbowVal2.HueSelectionPosition + 1
-            if RainbowVal2.RainbowColorValue >= 1 then
-                RainbowVal2.RainbowColorValue = 0
-            end
-            if RainbowVal2.HueSelectionPosition == 130 then
-                RainbowVal2.HueSelectionPosition = 0
-            end
-        end
-end)()
+coroutine.wrap(function() while wait() do RainbowVal2.RainbowColorValue = RainbowVal2.RainbowColorValue + 1 / 255 RainbowVal2.HueSelectionPosition = RainbowVal2.HueSelectionPosition + 1 if RainbowVal2.RainbowColorValue >= 1 then RainbowVal2.RainbowColorValue = 0 end if RainbowVal2.HueSelectionPosition == 130 then RainbowVal2.HueSelectionPosition = 0 end end end)()
 local UserInputService = game:GetService('UserInputService')
 local TextService = game:GetService('TextService')
 local TweenService = game:GetService('TweenService')
@@ -27,10 +13,39 @@ local RenderStepped = game:GetService('RunService').RenderStepped
 local LocalPlayer = game:GetService('Players').LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 local RunService = game:GetService("RunService")
-local LocalPlayer = game:GetService("Players").LocalPlayer
+
+local LibraryFunctions = {}
+local InputAliases = setmetatable({
+	One = "1",
+	Two = "2",
+	Three = "3",
+	Four = "4",
+	Five = "5",
+	Six = "6",
+	Seven = "7",
+	Eight = "8",
+	Nine = "9",
+	Zero = "0",
+	Delete = "DEL",
+	Insert = "INS",
+	LeftAlt = "LA",
+	LeftShift = "LS",
+	LeftControl = "LC",
+	RightAlt = "RA",
+	RightShift = "RS",
+	CapsLock = "LOCK",
+	RightControl = "RC",
+	MouseButton1 = "M1",
+	MouseButton2 = "M2",
+	MouseButton3 = "M3"
+}, {
+	__index = function(Self, Key)
+		return string.upper(rawget(Self, Key) or Key)
+	end
+})
 
 
-function GetMouseLocation(Inset)
+local function GetMouseLocation(Inset)
 	local Location = UserInputService:GetMouseLocation()
 	if not Inset then
 		Location -= Vector2.new(0, 36)
@@ -38,7 +53,7 @@ function GetMouseLocation(Inset)
 	return Location
 end
 
-function Hovering(v)
+local function Hovering(v)
 	local M = GetMouseLocation()
 	local P = v.AbsolutePosition
 	local S = v.AbsoluteSize
@@ -1673,6 +1688,15 @@ end
 							end
 						end
 					end)
+					local function ConnectedFunction(input, _gameProcessed)
+						if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.MouseButton2 then
+							if ColorpickerFrame.Visible and not Hovering(ColorpickerFrame) then --and not Hovering(self.Button) -- signal functions
+								ColorpickerFrame.Visible = false
+							end
+						end
+					end
+				
+					UserInputService.InputBegan:Connect(ConnectedFunction)
 					Colorpicker.MouseButton1Click:Connect(function()
 						if ColorPickerToggled == false then
 							ColorPickerToggled = not ColorPickerToggled
@@ -1742,16 +1766,7 @@ end
 							pcall(callback, BoxColor.BackgroundColor3)
 						end
 					end)	
-					
-					local function ConnectedFunction(input, _gameProcessed)
-						if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.MouseButton2 then
-							if ColorpickerFrame.Visible and not Hovering(ColorpickerFrame) then --and not Hovering(self.Button) -- signal functions
-								ColorpickerFrame.Visible = false
-							end
-						end
-					end
-					
-					UserInputService.InputBegan:Connect(ConnectedFunction)
+		
 					
 					if side == 'Left' then
 						Colorpicker.Parent = Left
@@ -1762,6 +1777,8 @@ end
 						print('please select a side for the ' .. text .. ' colorpicker')
 					end
 			end 
+
+
 
             function items:Button(side, text, callback, callback_2, prompttitle, promptmessage)
                 assert(type(callback) == 'function', 'callback must be a function')
@@ -1843,21 +1860,21 @@ end
                 end)
 
                 ButtonFrame.MouseEnter:Connect(function()
-					game.TweenService:Create(ButtonFrame, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(42, 34, 80)}):Play()
-					game.TweenService:Create(ButtonUIStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(76, 70, 115)}):Play()
+					TweenService:Create(ButtonFrame, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(42, 34, 80)}):Play()
+					TweenService:Create(ButtonUIStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(76, 70, 115)}):Play()
 				end)
                 
 				ButtonFrame.MouseLeave:Connect(function()
-					game.TweenService:Create(ButtonFrame, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(34, 28, 64)}):Play()
-					game.TweenService:Create(ButtonUIStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(107, 89, 222)}):Play()
+					TweenService:Create(ButtonFrame, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(34, 28, 64)}):Play()
+					TweenService:Create(ButtonUIStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Color = Color3.fromRGB(107, 89, 222)}):Play()
 				end)
 
                 ButtonFrame.MouseButton1Down:Connect(function()
-					game.TweenService:Create(ButtonFrame, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(91, 73, 143)}):Play()
+					TweenService:Create(ButtonFrame, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(91, 73, 143)}):Play()
 				end)
 
                 ButtonFrame.MouseButton1Up:Connect(function()
-					game.TweenService:Create(ButtonFrame, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(42, 34, 80)}):Play()
+					TweenService:Create(ButtonFrame, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(42, 34, 80)}):Play()
 				end)
 	
             end

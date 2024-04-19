@@ -75,10 +75,10 @@ function LibraryFunctions:Connect(Signal, Function)
 	return Connection
 end
 
-function LibraryFunctions:Hovering(Object)
+function LibraryFunctions:Hovering(a)
 	local M = LibraryFunctions:GetMouseLocation()
-	local P = Object.AbsolutePosition
-	local S = Object.AbsoluteSize
+	local P = a.Position
+	local S = a.AbsoluteSize
 
 	return (M.X >= P.X and M.X <= P.X + S.X) and (M.Y >= P.Y and M.Y <= P.Y + S.Y)
 end
@@ -91,23 +91,6 @@ end
 
 function LibraryFunctions:Tween(Object, Properties, Time, ...)
 	TweenService:Create(Object, TweenInfo.new(Time, ...), Properties):Play()
-end
-
-
-local function GetMouseLocation(Inset)
-	local Location = UserInputService:GetMouseLocation()
-	if not Inset then
-		Location -= Vector2.new(0, 36)
-	end
-	return Location
-end
-
-local function Hovering(v)
-	local M = GetMouseLocation()
-	local P = v.AbsolutePosition
-	local S = v.AbsoluteSize
-
-	return (M.X >= P.X and M.X <= P.X + S.X) and (M.Y >= P.Y and M.Y <= P.Y + S.Y)
 end
 
 local function MakeDraggable(topbarobject, object)

@@ -29,6 +29,23 @@ local Mouse = LocalPlayer:GetMouse()
 local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 
+
+function GetMouseLocation(Inset)
+	local Location = UserInputService:GetMouseLocation()
+	if not Inset then
+		Location -= Vector2.new(0, 36)
+	end
+	return Location
+end
+
+function Hovering(v)
+	local M = GetMouseLocation()
+	local P = v.AbsolutePosition
+	local S = v.AbsoluteSize
+
+	return (M.X >= P.X and M.X <= P.X + S.X) and (M.Y >= P.Y and M.Y <= P.Y + S.Y)
+end
+
 local function MakeDraggable(topbarobject, object)
 	local Dragging = nil
 	local DragInput = nil
@@ -1598,14 +1615,13 @@ end
 					pcall(callback, toggled)
 				end)
 ]]
-
 				local function UpdateColorPicker(nope)
 					BoxColor.BackgroundColor3 = Color3.fromHSV(ColorH, ColorS, ColorV)
 					Color.BackgroundColor3 = Color3.fromHSV(ColorH, 1, 1)
 	
 					pcall(callback, BoxColor.BackgroundColor3)
 				end
-	
+
 				ColorH = 1 - (math.clamp(HueSelection.AbsolutePosition.Y - Hue.AbsolutePosition.Y, 0, Hue.AbsoluteSize.Y) / Hue.AbsoluteSize.Y)
 				ColorS = (math.clamp(ColorSelection.AbsolutePosition.X - Color.AbsolutePosition.X, 0, Color.AbsoluteSize.X) / Color.AbsoluteSize.X)
 				ColorV = 1 - (math.clamp(ColorSelection.AbsolutePosition.Y - Color.AbsolutePosition.Y, 0, Color.AbsoluteSize.Y) / Color.AbsoluteSize.Y)
@@ -1726,6 +1742,16 @@ end
 							pcall(callback, BoxColor.BackgroundColor3)
 						end
 					end)	
+					
+					local function ConnectedFunction(input, _gameProcessed)
+						if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.MouseButton2 then
+							if ColorpickerFrame.Visible and not Hovering(ColorpickerFrame) then --and not Hovering(self.Button) -- signal functions
+								ColorpickerFrame.Visible = false
+							end
+						end
+					end
+					
+					UserInputService.InputBegan:Connect(ConnectedFunction)
 					
 					if side == 'Left' then
 						Colorpicker.Parent = Left

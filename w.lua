@@ -75,9 +75,22 @@ function LibraryFunctions:Connect(Signal, Function)
 	return Connection
 end
 
+function convertAbsoluteToScale(xxx)
+	local container = xxx.Parent
+	
+	local S = container.AbsolutePosition
+	local E = container.AbsoluteSize
+	
+	local B = xxx.AbsolutePosition
+	local A = B - S
+
+	return UDim2.fromScale(A.X / E.X, A.Y / E.Y)
+end
+
+
 function LibraryFunctions:Hovering(a)
 	local M = LibraryFunctions:GetMouseLocation()
-	local P = a.Position
+	local P = a.AbsolutePosition
 	local S = a.AbsoluteSize
 
 	return (M.X >= P.X and M.X <= P.X + S.X) and (M.Y >= P.Y and M.Y <= P.Y + S.Y)
@@ -91,6 +104,23 @@ end
 
 function LibraryFunctions:Tween(Object, Properties, Time, ...)
 	TweenService:Create(Object, TweenInfo.new(Time, ...), Properties):Play()
+end
+
+
+local function GetMouseLocation(Inset)
+	local Location = UserInputService:GetMouseLocation()
+	if not Inset then
+		Location -= Vector2.new(0, 36)
+	end
+	return Location
+end
+
+local function Hovering(v)
+	local M = GetMouseLocation()
+	local P = v.AbsolutePosition
+	local S = v.AbsoluteSize
+
+	return (M.X >= P.X and M.X <= P.X + S.X) and (M.Y >= P.Y and M.Y <= P.Y + S.Y)
 end
 
 local function MakeDraggable(topbarobject, object)
@@ -1722,7 +1752,7 @@ end
 					end)
 					LibraryFunctions:Connect(InputService.InputBegan, function(Input)
 						if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.MouseButton2 then
-							if ColorpickerFrame.Visible and not LibraryFunctions:Hovering(ColorpickerFrame)and not LibraryFunctions:Hovering(self.Button) then
+							if ColorpickerFrame.Visible and not convertAbsoluteToScale(ColorpickerFrame)and not LibraryFunctions:Hovering(self.Button) then
 								ColorpickerFrame.Visible = false
 							end
 						end

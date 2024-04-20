@@ -2622,11 +2622,9 @@ end
 				end
 
 				local function dropdownoff()
-						--if not (debounce) then return end
+						if DropdownChildFrame.Visible == true then
 						opened = true
 						debounce = false
-				
-						if DropdownChildFrame.Visible == true then
 						local tween = TweenService:Create(DropdownChildFrame, TweenInfo.new(.2), {BackgroundTransparency = 1})
 						TweenService:Create(DropdownChildFrameOutline, TweenInfo.new(.2), {BackgroundTransparency = 1}):Play()
 						for i,v in next, DropdownChildFrameScroll:GetDescendants() do

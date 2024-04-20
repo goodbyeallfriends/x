@@ -2331,16 +2331,16 @@ end
 					SliderValue.Text = tostring(Val)
 					pcall(callback, tonumber(Val))
 				end
-
                 local cfg = {Value = start}
 
                 function SetStart(val)
 					local a = math.floor(tostring(val and (val / max) * (max - min) + min) or 0)
-					SlideCircle.Position = UDim2.new((val or 0) / max, 0, 1, 0) --[[ with animation:SlideBackLight:TweenSize(UDim2.new((val or 0) / max, 0, 1, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 3, true) / SlideCircle:TweenPosition(UDim2.new((val or 0) / max, 0, 1, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 3, true)]]
+					SlideCircle.Position = UDim2.new((val or 0) / max, 0, 1, 0) 
+					--[[ with animation:SlideBackLight:TweenSize(UDim2.new((val or 0) / max, 0, 1, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 3, true) / SlideCircle:TweenPosition(UDim2.new((val or 0) / max, 0, 1, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 3, true)]]
 					SlideBackLight.Size = UDim2.new((val or 0) / max, 0, 1, 0)
 					SliderValue.Text = tostring(cfg.Value)
 					cfg.Value = val
-						return pcall(callback, tonumber(cfg.Value))
+					return pcall(callback, tonumber(cfg.Value))
 				end
                 SetStart(start)
 
@@ -2586,7 +2586,8 @@ end
 				end)
 				
 				local debounce = false
-
+				local opened
+				
 				local function toggle()
 					DropdownChildFrameOutline.Visible = true
 					if (debounce) then return end
@@ -2599,7 +2600,6 @@ end
 
 					local tween = TweenService:Create(DropdownChildFrame, TweenInfo.new(.2), {BackgroundTransparency = opened and 0 or 1})
 					TweenService:Create(DropdownChildFrameOutline, TweenInfo.new(.2), {BackgroundTransparency = opened and 0 or 1}):Play()
-					
 					for i,v in next, DropdownChildFrameScroll:GetDescendants() do
 						if v:IsA('TextButton') then
 							game.TweenService:Create(v, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = opened and 0 or 1}):Play()
@@ -2624,9 +2624,7 @@ end
 				local function dropdownoff()
 						--if not (debounce) then return end
 
-						if (not opened) then
-							debounce = false
-						end
+				
 						if DropdownChildFrame.Visible == true then
 						local tween = TweenService:Create(DropdownChildFrame, TweenInfo.new(.2), {BackgroundTransparency = 1})
 						TweenService:Create(DropdownChildFrameOutline, TweenInfo.new(.2), {BackgroundTransparency = 1}):Play()
@@ -2642,12 +2640,9 @@ end
 							end
 						end
 						tween:Play()
-						if (not opened) then
-							wait(.2)
-							debounce = false
-						end
-						DropdownChildFrame.Visible = false
 						opened = false
+						debounce = true
+						DropdownChildFrame.Visible = false
 					end
 				end
 

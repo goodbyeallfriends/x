@@ -2483,12 +2483,13 @@ end
 				DropdownDropFrameArrowHolder.Size = UDim2.new(0, 14, 0, 16)
 			
 				local DropStroke = Instance.new("UIStroke")
+				DropStroke.Name = "DropdownStroke" 
 				DropStroke.Enabled = true
 				DropStroke.Parent = DropdownDropFrame
-				DropStroke.Color = Color3.fromRGB(112, 74, 248)
+				DropStroke.Color = Color3.fromRGB(56, 45, 109)
 				DropStroke.LineJoinMode = Enum.LineJoinMode.Round
 				DropStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
-				DropStroke.Thickness = 0.7
+				DropStroke.Thickness = 0.835
 				DropStroke.Transparency = 0
 
 				local DropdownDropFrameArrowHolderCorner = Instance.new("UICorner")
@@ -2620,6 +2621,26 @@ end
 					DropdownChildFrame.Visible = opened
 				end
 
+				local function dropdownoff()
+					if DropdownChildFrame.Visible == true then
+						local tween = TweenService:Create(DropdownChildFrame, TweenInfo.new(.2), {BackgroundTransparency = 1})
+						TweenService:Create(DropdownChildFrameOutline, TweenInfo.new(.2), {BackgroundTransparency = 1}):Play()
+						for i,v in next, DropdownChildFrameScroll:GetDescendants() do
+							if v:IsA('TextButton') then
+								game.TweenService:Create(v, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1}):Play()
+							end
+							if v:IsA('TextLabel') then
+								game.TweenService:Create(v, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1}):Play()
+							end
+							if v:IsA('ImageLabel') then
+								game.TweenService:Create(v, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageTransparency = 1}):Play()
+							end
+						end
+						tween:Play()
+						DropdownChildFrame.Visible = false
+					end
+				end
+
 				DropdownInteract.InputBegan:Connect(function(inp)
 					if (inp.UserInputType == Enum.UserInputType.MouseButton1) then
 						toggle()
@@ -2643,7 +2664,7 @@ end
 					UserInputService.InputBegan:Connect(function(input)
 						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2 then
 							if DropdownChildFrameScroll.Visible == true and not in_drop and not in_drop2 then
-								toggle()
+								dropdownoff()
 								--DropdownScroll.Visible = false
 								--DropdownScroll.CanvasPosition = Vector2.new(0,0)
 							end

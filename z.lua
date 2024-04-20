@@ -73,12 +73,25 @@ function LibraryFunctions:Connect(Signal, Function)
 	table.insert(self.Connections, Connection)
 
 	return Connection
+end -- 
+
+function convertAbsoluteToScale(xxx)
+	local container = xxx.Parent
+	
+	local S = container.AbsolutePosition
+	local E = container.AbsoluteSize
+	
+	local B = xxx.AbsolutePosition
+	local A = B - S
+
+	return UDim2.fromScale(A.X / E.X, A.Y / E.Y)
 end
 
-function LibraryFunctions:Hovering(Object)
+
+function LibraryFunctions:Hovering(a)
 	local M = LibraryFunctions:GetMouseLocation()
-	local P = Object.AbsolutePosition
-	local S = Object.AbsoluteSize
+	local P = a.AbsolutePosition
+	local S = a.AbsoluteSize
 
 	return (M.X >= P.X and M.X <= P.X + S.X) and (M.Y >= P.Y and M.Y <= P.Y + S.Y)
 end
@@ -1737,13 +1750,13 @@ end
 							end
 						end
 					end)
-					LibraryFunctions:Connect(InputService.InputBegan, function(Input)
-						if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.MouseButton2 then
-							if ColorpickerFrame.Visible and not LibraryFunctions:Hovering(ColorpickerFrame)and not LibraryFunctions:Hovering(self.Button) then
-								ColorpickerFrame.Visible = false
-							end
-						end
-					end)
+				--	LibraryFunctions:Connect(InputService.InputBegan, function(Input)
+					--	if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.MouseButton2 then
+						--	if ColorpickerFrame.Visible and not convertAbsoluteToScale(ColorpickerFrame) and not LibraryFunctions:Hovering(self.Button) then
+						--		ColorpickerFrame.Visible = false
+						--	end
+					--	end
+					--end)
 
 					--local function ConnectedFunction(input, _gameProcessed)
 					--	if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.MouseButton2 then
@@ -2442,7 +2455,7 @@ end
 				DropdownDropFrame.Size = UDim2.new(0, 173, 0, 22)
 				
 				local DropdownDropFrameCorner = Instance.new("UICorner")
-				DropdownDropFrameCorner.CornerRadius = UDim.new(0, 4)
+				DropdownDropFrameCorner.CornerRadius = UDim.new(0, 2)
 				DropdownDropFrameCorner.Name = "DropdownDropFrameCorner"
 				DropdownDropFrameCorner.Parent = DropdownDropFrame
 				
@@ -2612,6 +2625,30 @@ end
 						toggle()
 					end
 				end)
+
+					local in_drop = false
+					local in_drop2 = false
+					DropdownInteract.MouseEnter:Connect(function()
+						in_drop = true
+					end)
+					DropdownInteract.MouseLeave:Connect(function()
+						in_drop = false
+					end)
+					DropdownChildFrameScroll.MouseEnter:Connect(function()
+						in_drop2 = true
+					end)
+					DropdownChildFrameScroll.MouseLeave:Connect(function()
+						in_drop2 = false
+					end)
+					UserInputService.InputBegan:Connect(function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2 then
+							if DropdownChildFrameScroll.Visible == true and not in_drop and not in_drop2 then
+								toggle()
+								--DropdownScroll.Visible = false
+								--DropdownScroll.CanvasPosition = Vector2.new(0,0)
+							end
+						end
+					end)
 				
 				local pressed = false
 				for _, opt in next, options do
@@ -2659,10 +2696,10 @@ end
 						pressed = false
 					end)
 					DropdownBtn.MouseEnter:Connect(function()
-						game.TweenService:Create(DropdownBtn, TweenInfo.new(0, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundColor3 = Color3.fromRGB(107, 89, 222)}):Play()
+						TweenService:Create(DropdownBtn, TweenInfo.new(0, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundColor3 = Color3.fromRGB(107, 89, 222)}):Play()
 					end)
 					DropdownBtn.MouseLeave:Connect(function()
-						game.TweenService:Create(DropdownBtn, TweenInfo.new(0, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundColor3 = Color3.fromRGB(22, 20, 45)}):Play()
+						TweenService:Create(DropdownBtn, TweenInfo.new(0, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundColor3 = Color3.fromRGB(22, 20, 45)}):Play()
 					end)
 				end
 				

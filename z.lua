@@ -6,8 +6,6 @@ if not game:IsLoaded() then game.Loaded:wait() end
 if game.CoreGui:FindFirstChild("Vice") then game.CoreGui:FindFirstChild("Vice"):Destroy() end 
 if game.CoreGui:FindFirstChild("NotifsGui") then game.CoreGui:FindFirstChild("NotifsGui"):Destroy() end
 
-local RainbowVal2 = {RainbowColorValue=0,HueSelectionPosition=0}
-coroutine.wrap(function() while wait() do RainbowVal2.RainbowColorValue = RainbowVal2.RainbowColorValue + 1 / 255 RainbowVal2.HueSelectionPosition = RainbowVal2.HueSelectionPosition + 1 if RainbowVal2.RainbowColorValue >= 1 then RainbowVal2.RainbowColorValue = 0 end if RainbowVal2.HueSelectionPosition == 130 then RainbowVal2.HueSelectionPosition = 0 end end end)()
 local UserInputService = game:GetService('UserInputService')
 local InputService = game:GetService('UserInputService')
 local TextService = game:GetService('TextService')
@@ -1536,7 +1534,7 @@ end
 				Color.Image = "rbxassetid://4155801252"
 
 				local ColorCorner = Instance.new("UICorner")
-				ColorCorner.CornerRadius = UDim.new(0, 4)
+				ColorCorner.CornerRadius = UDim.new(0, 2)
 				ColorCorner.Name = "ColorCorner"
 				ColorCorner.Parent = Color
 
@@ -1595,13 +1593,10 @@ end
 				UIStroke_2.Transparency = 0.4000000059604645
 				UIStroke_2.Parent = Hue
 
-				local UIStroke_3 = Instance.new("UIStroke")
-				UIStroke_3.Color = Color3.fromRGB(131, 106, 255)
-				UIStroke_3.Parent = ColorpickerFrame
-
 				local ColorUIStroke = Instance.new("UIStroke")
+				ColorUIStroke.Name = "ColorUIStroke"
 				ColorUIStroke.Parent = ColorpickerFrame
-				ColorUIStroke.Color = Color3.fromRGB(131, 106, 255)
+				ColorUIStroke.Color = Color3.fromRGB(54, 39, 107)
 				ColorUIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
 				ColorUIStroke.LineJoinMode = Enum.LineJoinMode.Round
 				ColorUIStroke.Thickness = 1

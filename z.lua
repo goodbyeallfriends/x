@@ -1,11 +1,10 @@
--- (WARNING: This Repository is Licensed! You are not permitted to use/copy this User Interface library)
+-- // WARNING: This Repository is Licensed! You are not permitted to use/copy this User Interface library
 local Global = getgenv and getgenv() or _G;
 local LibraryFunctions = {Notifications = {}, Connections = {}, Flags = {}}
 
 if not game:IsLoaded() then game.Loaded:wait() end
 if game.CoreGui:FindFirstChild("Vice") then game.CoreGui:FindFirstChild("Vice"):Destroy() end 
 if game.CoreGui:FindFirstChild("NotifsGui") then game.CoreGui:FindFirstChild("NotifsGui"):Destroy() end
-
 local UserInputService = game:GetService('UserInputService')
 local InputService = game:GetService('UserInputService')
 local TextService = game:GetService('TextService')
@@ -47,29 +46,21 @@ local InputAliases = setmetatable({
 
 function LibraryFunctions:Create(Class, Properties)
 	local Object = Instance.new(Class)
-
 	for Property, Value in next, Properties do
 		Object[Property] = Value
 	end
-
 	return Object
 end
 
 function LibraryFunctions:GetMouseLocation(Inset)
 	local Location = InputService:GetMouseLocation()
-
-	if not Inset then
-		Location -= Vector2.new(0, 36)
-	end
-
+	if not Inset then Location -= Vector2.new(0, 36) end
 	return Location
 end
 
 function LibraryFunctions:Connect(Signal, Function)
 	local Connection = Signal:Connect(Function)
-
 	table.insert(self.Connections, Connection)
-
 	return Connection
 end  
 
@@ -77,20 +68,17 @@ function LibraryFunctions:Hovering(a)
 	local M = LibraryFunctions:GetMouseLocation()
 	local P = a.AbsolutePosition
 	local S = a.AbsoluteSize
-
 	return (M.X >= P.X and M.X <= P.X + S.X) and (M.Y >= P.Y and M.Y <= P.Y + S.Y)
 end
 
 function LibraryFunctions:Round(Number, Increment)
 	local Bracket = 1 / Increment
-
 	return math.round(Number * Bracket) / Bracket
 end
 
 function LibraryFunctions:Tween(Object, Properties, Time, ...)
 	TweenService:Create(Object, TweenInfo.new(Time, ...), Properties):Play()
 end
-
 
 local function GetMouseLocation(Inset)
 	local Location = UserInputService:GetMouseLocation()
@@ -100,13 +88,6 @@ local function GetMouseLocation(Inset)
 	return Location
 end
 
-local function Hovering(v)
-	local M = GetMouseLocation()
-	local P = v.AbsolutePosition
-	local S = v.AbsoluteSize
-
-	return (M.X >= P.X and M.X <= P.X + S.X) and (M.Y >= P.Y and M.Y <= P.Y + S.Y)
-end
 
 local function MakeDraggable(topbarobject, object)
 	local Dragging = nil
@@ -1565,6 +1546,7 @@ end
 				HueSelection.BackgroundTransparency = 1.000
 				HueSelection.Position = UDim2.new(0.48, 0, 1 - select(1, Color3.toHSV(preset)))
 				HueSelection.Size = UDim2.new(0, 15, 0, 15)
+				HueSelection.ZIndex = 5
 				HueSelection.Image = "http://www.roblox.com/asset/?id=4805639000"
 
 				local UIStroke1 = Instance.new("UIStroke")
@@ -1616,7 +1598,6 @@ end
 									ColorSelection.Position = UDim2.new(ColorX, 0, ColorY, 0)
 									ColorS = ColorX
 									ColorV = 1 - ColorY
-	
 									UpdateColorPicker(true)
 								end)
 						 end
@@ -1660,10 +1641,14 @@ end
 
 					local color_init = false
 					local in_out = false
+
 					ColorpickerFrame.MouseEnter:Connect(function()
+						LibraryFunctions:Tween(ColorUIStroke, {Color = Color3.fromRGB(117, 85, 232)}, 0.4)
 						color_init = true
 					end)
+
 					ColorpickerFrame.MouseLeave:Connect(function()
+						LibraryFunctions:Tween(ColorUIStroke, {Color = Color3.fromRGB(54, 39, 107)}, 0.4)
 						color_init = false
 					end)
 					ColorpickerFrame.MouseEnter:Connect(function()
@@ -1672,6 +1657,7 @@ end
 					ColorpickerFrame.MouseLeave:Connect(function()
 						in_out = false
 					end)
+					
 					UserInputService.InputBegan:Connect(function(input)
 						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2 then
 							if ColorpickerFrame.Visible == true and not color_init and not in_out then

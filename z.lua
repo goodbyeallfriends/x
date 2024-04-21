@@ -1594,7 +1594,6 @@ end
 				local function UpdateColorPicker(nope)
 					BoxColor.BackgroundColor3 = Color3.fromHSV(ColorH, ColorS, ColorV)
 					Color.BackgroundColor3 = Color3.fromHSV(ColorH, 1, 1)
-	
 					pcall(callback, BoxColor.BackgroundColor3)
 				end
 
@@ -1650,8 +1649,8 @@ end
 						end
 					end)
 					local function colorpickerToggleOFF()
-						ColorPickerToggled = not ColorPickerToggled
 						if ColorpickerFrame.Visible == true then
+							ColorPickerToggled = not ColorPickerToggled
 							ColorpickerFrame:TweenSize(UDim2.new(0, 175, 0, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
 							repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 175, 0, 0)
 							ColorpickerFrame.Visible = false
@@ -1680,38 +1679,21 @@ end
 							end
 						end
 					end)
-
-				--	LibraryFunctions:Connect(InputService.InputBegan, function(Input)
-					--	if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.MouseButton2 then
-						--	if ColorpickerFrame.Visible and not convertAbsoluteToScale(ColorpickerFrame) and not LibraryFunctions:Hovering(self.Button) then
-						--		ColorpickerFrame.Visible = false
-						--	end
-					--	end
-					--end)
-
-					--local function ConnectedFunction(input, _gameProcessed)
-					--	if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.MouseButton2 then
-					--		if ColorpickerFrame.Visible and not Hovering(ColorpickerFrame) then --and not Hovering(self.Button) -- signal functions
-					--				ColorpickerFrame.Visible = false
-					--			end
-					--		end
-					--	end
-					--UserInputService.InputBegan:Connect(ConnectedFunction)
-
 					Colorpicker.MouseButton1Click:Connect(function()
-						if ColorPickerToggled == false then
-							ColorPickerToggled = not ColorPickerToggled -- {0, 175},{0, 156}
-							ColorpickerFrame.Visible = true
-							ColorpickerFrame:TweenSize(UDim2.new(0, 175, 0, 156),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
-							repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 175, 0, 156)
-						else
-							ColorPickerToggled = not ColorPickerToggled
-							ColorpickerFrame:TweenSize(UDim2.new(0, 175, 0, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
-							repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 175, 0, 0)
-							ColorpickerFrame.Visible = false
+						if not ColorpickerFrame.Visible == true then
+							if ColorPickerToggled == false then
+								ColorPickerToggled = not ColorPickerToggled -- {0, 175},{0, 156}
+								ColorpickerFrame.Visible = true
+								ColorpickerFrame:TweenSize(UDim2.new(0, 175, 0, 156),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
+								repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 175, 0, 156)
+							else
+								ColorPickerToggled = not ColorPickerToggled
+								ColorpickerFrame:TweenSize(UDim2.new(0, 175, 0, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
+								repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 175, 0, 0)
+								ColorpickerFrame.Visible = false
+							end
 						end
 					end)
-
 					if side == 'Left' then
 						Colorpicker.Parent = Left
 					elseif side == 'Right' then
@@ -1721,8 +1703,6 @@ end
 						print('please select a side for the ' .. text .. ' colorpicker')
 					end
 			end 
-
-
 
             function items:Button(side, text, callback, callback_2, prompttitle, promptmessage)
                 assert(type(callback) == 'function', 'callback must be a function')

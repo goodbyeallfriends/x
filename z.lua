@@ -71,20 +71,7 @@ function LibraryFunctions:Connect(Signal, Function)
 	table.insert(self.Connections, Connection)
 
 	return Connection
-end -- 
-
-function convertAbsoluteToScale(xxx)
-	local container = xxx.Parent
-	
-	local S = container.AbsolutePosition
-	local E = container.AbsoluteSize
-	
-	local B = xxx.AbsolutePosition
-	local A = B - S
-
-	return UDim2.fromScale(A.X / E.X, A.Y / E.Y)
-end
-
+end  
 
 function LibraryFunctions:Hovering(a)
 	local M = LibraryFunctions:GetMouseLocation()
@@ -1555,7 +1542,7 @@ end
 				Hue.Parent = ColorpickerFrame
 				Hue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Hue.Position = UDim2.new(0, 157, 0, 9)
-				Hue.Size = UDim2.new(0, 25, 0, 134)
+				Hue.Size = UDim2.new(0, 9, 0, 134)
 
 				local HueCorner = Instance.new("UICorner")
 				HueCorner.CornerRadius = UDim.new(0, 3)
@@ -1660,6 +1647,38 @@ end
 							end
 						end
 					end)
+					local function colorpickerToggleOFF()
+						ColorPickerToggled = not ColorPickerToggled
+						if ColorpickerFrame.Visible == true then
+							ColorpickerFrame:TweenSize(UDim2.new(0, 188, 0, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
+							repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 188, 0, 0)
+							ColorpickerFrame.Visible = false
+							ColorPickerToggled = false
+						end
+					end
+
+					local color_init = false
+					local in_out = false
+					Colorpicker.MouseEnter:Connect(function()
+						color_init = true
+					end)
+					Colorpicker.MouseLeave:Connect(function()
+						color_init = false
+					end)
+					Colorpicker.MouseEnter:Connect(function()
+						in_out = true
+					end)
+					Colorpicker.MouseLeave:Connect(function()
+						in_out = false
+					end)
+					UserInputService.InputBegan:Connect(function(input)
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2 then
+							if ColorpickerFrame.Visible == true and not color_init and not in_out then
+								colorpickerToggleOFF()
+							end
+						end
+					end)
+
 				--	LibraryFunctions:Connect(InputService.InputBegan, function(Input)
 					--	if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.MouseButton2 then
 						--	if ColorpickerFrame.Visible and not convertAbsoluteToScale(ColorpickerFrame) and not LibraryFunctions:Hovering(self.Button) then

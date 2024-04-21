@@ -1562,7 +1562,7 @@ end
 				HueSelection.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				HueSelection.BackgroundTransparency = 1.000
 				HueSelection.Position = UDim2.new(0.48, 0, 1 - select(1, Color3.toHSV(preset)))
-				HueSelection.Size = UDim2.new(0, 18, 0, 18)
+				HueSelection.Size = UDim2.new(0, 15, 0, 15)
 				HueSelection.Image = "http://www.roblox.com/asset/?id=4805639000"
 
 				local UIStroke1 = Instance.new("UIStroke")

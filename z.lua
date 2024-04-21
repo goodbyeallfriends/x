@@ -1504,7 +1504,7 @@ end
 				ColorpickerFrame.Visible = false
 				ColorpickerFrame.ClipsDescendants = true
 				ColorpickerFrame.Position = UDim2.new(0.999, 0,0.289, 0)
-				ColorpickerFrame.ZIndex = 331
+				ColorpickerFrame.ZIndex = 5
 				ColorpickerFrame.Size = UDim2.new(0, 175, 0, 0)
 
 				local ColorPickerFrameCorner = Instance.new("UICorner")

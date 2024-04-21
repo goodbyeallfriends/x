@@ -1599,77 +1599,6 @@ end
 				UIStroke_3.Color = Color3.fromRGB(131, 106, 255)
 				UIStroke_3.Parent = ColorpickerFrame
 
-				local RainbowToggle = Instance.new("Frame")
-				RainbowToggle.Name = "RainbowToggle"
-				RainbowToggle.Parent = ColorpickerFrame
-				RainbowToggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				RainbowToggle.BackgroundTransparency = 1.000
-				RainbowToggle.BorderColor3 = Color3.fromRGB(27, 42, 53)
-				RainbowToggle.BorderSizePixel = 0
-				RainbowToggle.Position = UDim2.new(0, 0, 0.779999971, 0)
-				RainbowToggle.Size = UDim2.new(1, 0, 0, 36)
-
-				local UIStroke_4 = Instance.new("UIStroke")
-				UIStroke_4.Color = Color3.fromRGB(31, 26, 61)
-				UIStroke_4.Transparency = 1
-				UIStroke_4.Parent = RainbowToggle
-
-				local ToggleTitle = Instance.new("TextLabel")
-				ToggleTitle.Name = "ToggleTitle"
-				ToggleTitle.Parent = RainbowToggle
-				ToggleTitle.AnchorPoint = Vector2.new(1, 0.5)
-				ToggleTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				ToggleTitle.BackgroundTransparency = 1.000
-				ToggleTitle.Position = UDim2.new(0.96808511, 0, 0.5, 0)
-				ToggleTitle.Size = UDim2.new(0.96808511, -21, 1, 0)
-				ToggleTitle.Font = Enum.Font.GothamMedium
-				ToggleTitle.Text = "Rainbow"
-				ToggleTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-				ToggleTitle.TextSize = 14.000
-				ToggleTitle.TextXAlignment = Enum.TextXAlignment.Left
-				local ToggleFrameBack = Instance.new("Frame")
-				ToggleFrameBack.Name = "ToggleFrameBack"
-				ToggleFrameBack.Parent = RainbowToggle
-				ToggleFrameBack.AnchorPoint = Vector2.new(1, 0.5)
-				ToggleFrameBack.BackgroundColor3 = Color3.fromRGB(33, 28, 64)
-				ToggleFrameBack.Position = UDim2.new(0.96808511, -12, 0.5, 0)
-				ToggleFrameBack.Size = UDim2.new(0, 36, 0, 18)
-				local ToggleFrameBackCorner = Instance.new("UICorner")
-				ToggleFrameBackCorner.CornerRadius = UDim.new(1, 0)
-				ToggleFrameBackCorner.Name = "ToggleFrameBackCorner"
-				ToggleFrameBackCorner.Parent = ToggleFrameBack
-				local ToggleFrameCircle = Instance.new("Frame")
-				ToggleFrameCircle.Name = "ToggleFrameCircle"
-				ToggleFrameCircle.Parent = ToggleFrameBack
-				ToggleFrameCircle.AnchorPoint = Vector2.new(0, 0.5)
-				ToggleFrameCircle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				ToggleFrameCircle.Position = UDim2.new(0, 3, 0.5, 0)
-				ToggleFrameCircle.Size = UDim2.new(0, 14, 0, 14)
-				local ToggleFrameCircleCorner = Instance.new("UICorner")
-				ToggleFrameCircleCorner.CornerRadius = UDim.new(1, 0)
-				ToggleFrameCircleCorner.Name = "ToggleFrameCircleCorner"
-				ToggleFrameCircleCorner.Parent = ToggleFrameCircle	
-				local ToggleInteract1 = Instance.new("TextButton")
-				ToggleInteract1.Name = "ToggleInteract"
-				ToggleInteract1.Parent = RainbowToggle
-				ToggleInteract1.AnchorPoint = Vector2.new(0.5, 0.5)
-				ToggleInteract1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				ToggleInteract1.BackgroundTransparency = 1.000
-				ToggleInteract1.Position = UDim2.new(0.5, 0, 0.5, 0)
-				ToggleInteract1.Size = UDim2.new(1, 0, 1, 0)
-				ToggleInteract1.Text = ""
-				ToggleInteract1.TextColor3 = Color3.fromRGB(0, 0, 0)
-				ToggleInteract1.TextSize = 14.000
-
-				local ColorBarLine = Instance.new("Frame")
-				ColorBarLine.Name = "ColorBarLine"
-				ColorBarLine.Parent = ColorpickerFrame
-				ColorBarLine.BackgroundColor3 = Color3.fromRGB(255,255,255)
-				ColorBarLine.BackgroundTransparency = 0.95
-				ColorBarLine.BorderSizePixel = 0
-				ColorBarLine.Position = UDim2.new(0.0480000004, 0, 0.790000021, 0)
-				ColorBarLine.Size = UDim2.new(0.888297856, 0, -0.000618531543, 1)
-
 				local ColorUIStroke = Instance.new("UIStroke")
 				ColorUIStroke.Parent = ColorpickerFrame
 				ColorUIStroke.Color = Color3.fromRGB(131, 106, 255)
@@ -1677,20 +1606,7 @@ end
 				ColorUIStroke.LineJoinMode = Enum.LineJoinMode.Round
 				ColorUIStroke.Thickness = 1
 				ColorUIStroke.Transparency = 0
-			--[[
-				local rainbowtoggled = false
-				ToggleInteract.MouseButton1Click:Connect(function()
-					rainbowtoggled = not rainbowtoggled
-					if rainbowtoggled then
-						game.TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 20, 0.5, 0)}):Play()
-						game.TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(107, 89, 222)}):Play()
-					else
-						game.TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 3, 0.5, 0)}):Play()
-						game.TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(33, 28, 64)}):Play()
-					end
-					pcall(callback, toggled)
-				end)
-]]
+
 				local function UpdateColorPicker(nope)
 					BoxColor.BackgroundColor3 = Color3.fromHSV(ColorH, ColorS, ColorV)
 					Color.BackgroundColor3 = Color3.fromHSV(ColorH, 1, 1)
@@ -1779,60 +1695,7 @@ end
 							ColorpickerFrame.Visible = false
 						end
 					end)
-					--[[
-					Confirm.MouseButton1Click:Connect(function()
-						ColorPickerToggled = not ColorPickerToggled
-						ColorpickerFrame:TweenSize(UDim2.new(0, 403, 0, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.1,true)
-						repeat
-							wait()
-						until ColorpickerFrame.Size == UDim2.new(0, 403, 0, 0)
-						ColorpickerFrame.Visible = false
-					end)]]
-					ToggleInteract1.MouseButton1Down:Connect(function()
-						RainbowColorPicker = not RainbowColorPicker
-					
-						if ColorInput then
-							ColorInput:Disconnect()
-						end
-					
-						if HueInput then
-							HueInput:Disconnect()
-						end
-					
-						if RainbowColorPicker then
-							TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 20, 0.5, 0)}):Play()
-							TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(107, 89, 222)}):Play()
-					
-							OldToggleColor = BoxColor.BackgroundColor3
-							OldColor = Color.BackgroundColor3
-							OldColorSelectionPosition = ColorSelection.Position
-							OldHueSelectionPosition = HueSelection.Position
-					
-							while RainbowColorPicker do
-								BoxColor.BackgroundColor3 = Color3.fromHSV(RainbowVal2.RainbowColorValue, 1, 1)
-								Color.BackgroundColor3 = Color3.fromHSV(RainbowVal2.RainbowColorValue, 1, 1)
-					
-								ColorSelection.Position = UDim2.new(1, 0, 0, 0)
-								HueSelection.Position = UDim2.new(0.48, 0, 0, RainbowVal2.HueSelectionPosition)
-					
-								pcall(callback, BoxColor.BackgroundColor3)
-								wait()
-							end
-						elseif not RainbowColorPicker then
-							TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 3, 0.5, 0)}):Play()
-							TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(33, 28, 64)}):Play()
-							
-							BoxColor.BackgroundColor3 = OldToggleColor
-							Color.BackgroundColor3 = OldColor
-					
-							ColorSelection.Position = OldColorSelectionPosition
-							HueSelection.Position = OldHueSelectionPosition
-					
-							pcall(callback, BoxColor.BackgroundColor3)
-						end
-					end)	
-		
-					
+
 					if side == 'Left' then
 						Colorpicker.Parent = Left
 					elseif side == 'Right' then
@@ -2288,7 +2151,7 @@ end
 				SliderValue.Font = Enum.Font.Gotham
 				SliderValue.Text = min
 				SliderValue.TextColor3 = Color3.fromRGB(255, 255, 255)
-				SliderValue.TextSize = 13.000
+				SliderValue.TextSize = 12
 				SliderValue.TextXAlignment = Enum.TextXAlignment.Center
 				SliderValue.TextWrapped = true
 
@@ -2299,11 +2162,11 @@ end
 				local SliderValStroke = Instance.new("UIStroke")
 				SliderValStroke.Enabled = true
 				SliderValStroke.Parent = SliderValue
-				SliderValStroke.Color = Color3.fromRGB(123, 89, 245)
+				SliderValStroke.Color = Color3.fromRGB(54, 39, 107)
 				SliderValStroke.LineJoinMode = Enum.LineJoinMode.Round
 				SliderValStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 				SliderValStroke.Thickness = 1
-				SliderValStroke.Transparency = 0.4 --burda kaldım
+				SliderValStroke.Transparency = 0.4 
 
 				if side == 'Left' then
 					Slider.Parent = Left
@@ -2326,7 +2189,6 @@ end
 					pcall(callback, tonumber(Val))
 				end
                 local cfg = {Value = start}
-
                 function SetStart(val)
 					local a = math.floor(tostring(val and (val / max) * (max - min) + min) or 0)
 					SlideCircle.Position = UDim2.new((val or 0) / max, 0, 1, 0) 

@@ -1504,7 +1504,7 @@ end
 				ColorpickerFrame.Visible = false
 				ColorpickerFrame.ClipsDescendants = true
 				ColorpickerFrame.Position = UDim2.new(0.999, 0,0.289, 0)
-				ColorpickerFrame.ZIndex = 5
+				ColorpickerFrame.ZIndex = 3 -- Burada kaldım sikik kod
 				ColorpickerFrame.Size = UDim2.new(0, 175, 0, 0)
 
 				local ColorPickerFrameCorner = Instance.new("UICorner")
@@ -1540,6 +1540,7 @@ end
 
 				local Hue = Instance.new("ImageLabel")
 				Hue.Name = "Hue"
+				Hue.ZIndex = 4
 				Hue.Parent = ColorpickerFrame
 				Hue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Hue.Position = UDim2.new(0, 157, 0, 9)

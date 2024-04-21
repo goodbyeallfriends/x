@@ -1650,8 +1650,8 @@ end
 					local function colorpickerToggleOFF()
 						ColorPickerToggled = not ColorPickerToggled
 						if ColorpickerFrame.Visible == true then
-							ColorpickerFrame:TweenSize(UDim2.new(0, 188, 0, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
-							repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 188, 0, 0)
+							ColorpickerFrame:TweenSize(UDim2.new(0, 175, 0, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
+							repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 175, 0, 0)
 							ColorpickerFrame.Visible = false
 							ColorPickerToggled = false
 						end

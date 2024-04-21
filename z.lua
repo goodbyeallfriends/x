@@ -1659,16 +1659,16 @@ end
 
 					local color_init = false
 					local in_out = false
-					Colorpicker.MouseEnter:Connect(function()
+					ColorpickerFrame.MouseEnter:Connect(function()
 						color_init = true
 					end)
-					Colorpicker.MouseLeave:Connect(function()
+					ColorpickerFrame.MouseLeave:Connect(function()
 						color_init = false
 					end)
-					Colorpicker.MouseEnter:Connect(function()
+					ColorpickerFrame.MouseEnter:Connect(function()
 						in_out = true
 					end)
-					Colorpicker.MouseLeave:Connect(function()
+					ColorpickerFrame.MouseLeave:Connect(function()
 						in_out = false
 					end)
 					UserInputService.InputBegan:Connect(function(input)

@@ -1649,7 +1649,6 @@ end
 				ToggleFrameCircleCorner.CornerRadius = UDim.new(1, 0)
 				ToggleFrameCircleCorner.Name = "ToggleFrameCircleCorner"
 				ToggleFrameCircleCorner.Parent = ToggleFrameCircle	
-							
 				local ToggleInteract1 = Instance.new("TextButton")
 				ToggleInteract1.Name = "ToggleInteract"
 				ToggleInteract1.Parent = RainbowToggle
@@ -1772,15 +1771,11 @@ end
 							ColorPickerToggled = not ColorPickerToggled
 							ColorpickerFrame.Visible = true
 							ColorpickerFrame:TweenSize(UDim2.new(0, 188, 0, 194),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
-							repeat
-								wait()
-							until ColorpickerFrame.Size == UDim2.new(0, 188, 0, 194)
+							repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 188, 0, 194)
 						else
 							ColorPickerToggled = not ColorPickerToggled
 							ColorpickerFrame:TweenSize(UDim2.new(0, 188, 0, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
-							repeat
-								wait()
-							until ColorpickerFrame.Size == UDim2.new(0, 188, 0, 0)
+							repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 188, 0, 0)
 							ColorpickerFrame.Visible = false
 						end
 					end)
@@ -1925,7 +1920,6 @@ end
 
 						return
 					end
-
                     callback()
                 end)
 

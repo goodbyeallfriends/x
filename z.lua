@@ -1504,7 +1504,7 @@ end
 				ColorpickerFrame.Visible = false
 				ColorpickerFrame.ClipsDescendants = true
 				ColorpickerFrame.Position = UDim2.new(0.999, 0,0.289, 0)
-				ColorpickerFrame.Size = UDim2.new(0, 188, 0, 0) --payfix
+				ColorpickerFrame.Size = UDim2.new(0, 175, 0, 0)
 
 				local ColorPickerFrameCorner = Instance.new("UICorner")
 				ColorPickerFrameCorner.Name = "ColorPickerFrameCorner"
@@ -1698,14 +1698,14 @@ end
 
 					Colorpicker.MouseButton1Click:Connect(function()
 						if ColorPickerToggled == false then
-							ColorPickerToggled = not ColorPickerToggled
+							ColorPickerToggled = not ColorPickerToggled -- {0, 175},{0, 156}
 							ColorpickerFrame.Visible = true
-							ColorpickerFrame:TweenSize(UDim2.new(0, 188, 0, 194),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
-							repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 188, 0, 194)
+							ColorpickerFrame:TweenSize(UDim2.new(0, 175, 0, 156),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
+							repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 175, 0, 156)
 						else
 							ColorPickerToggled = not ColorPickerToggled
-							ColorpickerFrame:TweenSize(UDim2.new(0, 188, 0, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
-							repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 188, 0, 0)
+							ColorpickerFrame:TweenSize(UDim2.new(0, 175, 0, 0),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.2,true)
+							repeat wait() until ColorpickerFrame.Size == UDim2.new(0, 175, 0, 0)
 							ColorpickerFrame.Visible = false
 						end
 					end)

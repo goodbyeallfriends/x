@@ -3,8 +3,8 @@ local Global = getgenv and getgenv() or _G;
 local LibraryFunctions = {Notifications = {}, Connections = {}, Flags = {}}
 
 if not game:IsLoaded() then game.Loaded:wait() end
---if game.CoreGui:FindFirstChild("Vice") then game.CoreGui:FindFirstChild("Vice"):Destroy() end 
---if game.CoreGui:FindFirstChild("NotifsGui") then game.CoreGui:FindFirstChild("NotifsGui"):Destroy() end
+if game.CoreGui:FindFirstChild("Vice") then game.CoreGui:FindFirstChild("Vice"):Destroy() end 
+if game.CoreGui:FindFirstChild("NotifsGui") then game.CoreGui:FindFirstChild("NotifsGui"):Destroy() end
 local UserInputService = game:GetService('UserInputService')
 local InputService = game:GetService('UserInputService')
 local TextService = game:GetService('TextService')
@@ -314,15 +314,15 @@ function lib:Create(ver, size, hidekey)
 	NoImage.Parent = PromptNoButton
 	NoImage.ZIndex = 23
 
-	--UserInputService.InputBegan:Connect(function(key)
-	--	if key.KeyCode == hidekey then
-	--		pcall(function()
-	--			for i, v in pairs(game.CoreGui.Vice:GetChildren()) do
-	--				v.Visible = not v.Visible
-	--			end
-	--		end)
-	--	end
-	--end)
+	UserInputService.InputBegan:Connect(function(key)
+		if key.KeyCode == hidekey then
+			pcall(function()
+				for i, v in pairs(game.CoreGui.Vice:GetChildren()) do
+					v.Visible = not v.Visible
+				end
+			end)
+		end
+	end)
 
 	local function CreateWaterwark(title)
 		local waterwarkFrame = Instance.new("Frame")
@@ -2735,6 +2735,6 @@ function lib:Notify(title, desc, dur)
 	end)()
 end
 
---getgenv().library = lib
+getgenv().library = lib
 return lib
 

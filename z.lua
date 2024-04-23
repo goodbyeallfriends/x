@@ -1643,12 +1643,12 @@ end
 					local in_out = false
 
 					ColorpickerFrame.MouseEnter:Connect(function()
-						LibraryFunctions:Tween(ColorUIStroke, {Color = Color3.fromRGB(117, 85, 232)}, 0.4)
+						LibraryFunctions:Tween(ColorUIStroke, 3, Color = Color3.fromRGB(42, 34, 80))
+
 						color_init = true
 					end)
 
 					ColorpickerFrame.MouseLeave:Connect(function()
-						LibraryFunctions:Tween(ColorUIStroke, {Color = Color3.fromRGB(54, 39, 107)}, 0.4)
 						color_init = false
 					end)
 					ColorpickerFrame.MouseEnter:Connect(function()

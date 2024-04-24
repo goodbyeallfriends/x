@@ -1087,17 +1087,6 @@ function lib:Create(ver, size, hidekey)
 			SubTabBtnTitle.TextSize = 12.000
 			SubTabBtnTitle.TextXAlignment = Enum.TextXAlignment.Right
 
-
-			--[[local LeftMain = Instance.new("Frame")
-			LeftMain.Name = "LeftMain"
-			LeftMain.Parent = AllSubPagesFolder
-			LeftMain.AnchorPoint = Vector2.new(0, 0.5)
-			LeftMain.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			LeftMain.BackgroundTransparency = 1.000
-			LeftMain.Position = UDim2.new(0, 0, 0.5, 0)
-			LeftMain.Size = UDim2.new(0.5, 0, 1, 0)
-			LeftMain.Visible = true]]
-
 			local Left = Instance.new("ScrollingFrame")
 			Left.Name = "Left"
 			Left.Parent = AllSubPagesFolder
@@ -1133,7 +1122,7 @@ function lib:Create(ver, size, hidekey)
 			Right.Visible = false
 			--Right.ZIndex = 4
 			Right.BorderSizePixel = 0
-			--Right.CanvasSize = UDim2.new(0, 0, 0, 0)
+			Right.CanvasSize = UDim2.new(0, 0, 0, 0)
 			Right.ScrollBarThickness = 0
 			Right.BorderColor3 = Color3.new(0, 0, 0)
 
@@ -1154,22 +1143,6 @@ function lib:Create(ver, size, hidekey)
 			SubPageFade.Size = UDim2.new(1, -80, 1, -190)
 			SubPageFade.ZIndex = 99
 			SubPageFade.Visible = true
-
-
-			--[[local FadeImage1 = Instance.new("ImageLabel",PageItems)
-			FadeImage1["Name"] = "FadeImage1"
-			FadeImage1["ImageColor3"] = Color3.new(0.0901961, 0.0784314, 0.160784)
-			FadeImage1["BorderColor3"] = Color3.new(0, 0, 0)
-			FadeImage1["AnchorPoint"] = Vector2.new(0, 1)
-			FadeImage1["Image"] = "rbxassetid://7783533907"
-			FadeImage1["ImageTransparency"] = 1
-			FadeImage1["BackgroundTransparency"] = 1
-			FadeImage1["Position"] = UDim2.new(0, 0, 1, 0)
-			FadeImage1["Size"] = UDim2.new(1, -2, 0.1, 20) -- UDim2.new(1, -2, 0.207977235, 20)
-			FadeImage1["ZIndex"] = 4
-			FadeImage1["BorderSizePixel"] = 0
-			FadeImage1["BackgroundColor3"] = Color3.new(0, 0, 0)]]
-
 			
 			local FadeImage2 = Instance.new("ImageLabel",PageItems)
 			FadeImage2["Name"] = "FadeImage2"
@@ -1201,39 +1174,38 @@ function lib:Create(ver, size, hidekey)
 				end)()
 
 				coroutine.wrap(function()
-					game.TweenService:Create(SubPageFade, TweenInfo.new(lib.Animations.AnimSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundTransparency = 0}):Play()
+					TweenService:Create(SubPageFade, TweenInfo.new(lib.Animations.AnimSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundTransparency = 0}):Play()
 					wait(lib.Animations.AnimSpeed)
-					game.TweenService:Create(SubPageFade, TweenInfo.new(lib.Animations.AnimSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundTransparency = 1}):Play()
+					TweenService:Create(SubPageFade, TweenInfo.new(lib.Animations.AnimSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundTransparency = 1}):Play()
 				end)()
 
 				for i, v in next, AllSubTabBtns:GetDescendants() do
 					if v.Name == 'SubTabBtnInline' then
-						game.TweenService:Create(v, TweenInfo.new(lib.Animations.AnimSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundColor3 = Color3.fromRGB(23, 20, 41)}):Play()
+						TweenService:Create(v, TweenInfo.new(lib.Animations.AnimSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundColor3 = Color3.fromRGB(23, 20, 41)}):Play()
 					end
 				end
-				game.TweenService:Create(SubTabBtnInline, TweenInfo.new(lib.Animations.AnimSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundColor3 = Color3.fromRGB(107, 89, 222)}):Play()
+				TweenService:Create(SubTabBtnInline, TweenInfo.new(lib.Animations.AnimSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundColor3 = Color3.fromRGB(107, 89, 222)}):Play()
 			end)
 			
-			Left.LeftListing:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-				Left.CanvasSize = UDim2.new(0, Left.LeftListing.AbsoluteContentSize.X, 0, Left.LeftListing.AbsoluteContentSize.Y)
+		    --LeftListing:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+			--	Left.CanvasSize = UDim2.new(0, LeftListing.AbsoluteContentSize.X, 0, LeftListing.AbsoluteContentSize.Y)
+			--end)
+
+			LibraryFunctions:Connect(LeftListing:GetPropertyChangedSignal("AbsoluteCanvasSize"), function()
+				Left.CanvasSize = UDim2.new(0, LeftListing.AbsoluteContentSize.X, 0, LeftListing.AbsoluteContentSize.Y)
 			end)
-			Right.RightListing:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-				Right.CanvasSize = UDim2.new(0, Right.RightListing.AbsoluteContentSize.X, 0, Right.RightListing.AbsoluteContentSize.Y)
+			LibraryFunctions:Connect(RightListing:GetPropertyChangedSignal("AbsoluteCanvasSize"), function()
+				Right.CanvasSize = UDim2.new(0, RightListing.AbsoluteContentSize.X, 0, RightListing.AbsoluteContentSize.Y)
 			end)
 
-			--LibraryFunctions:Connect(path_here.heree.:GetPropertyChangedSignal("AbsoluteCanvasSize"), function()
-			--end)
+			LibraryFunctions:Connect(Left:GetPropertyChangedSignal("AbsoluteCanvasSize"), function()
+				FadeImage2.Visible = Left.AbsoluteCanvasSize.Y > Left.AbsoluteWindowSize.Y
+				--FadeImage1.Visible = Left.AbsoluteCanvasSize.Y > Left.AbsoluteWindowSize.Y
+			end)
 
 			--if Left.CanvasSize == v(0, 222) then
 			--	LibraryFunctions:Tween(FadeImage2,{ImageTransparency=1},1)
 			--end
-			
-			LibraryFunctions:Connect(Left:GetPropertyChangedSignal("AbsoluteCanvasSize"), function()
-				--FadeImage1.Visible = Left.AbsoluteCanvasSize.Y > Left.AbsoluteWindowSize.Y
-				FadeImage2.Visible = Left.AbsoluteCanvasSize.Y > Left.AbsoluteWindowSize.Y
-
-				--Holder_Extra_Bar.Visible = Left.AbsoluteCanvasSize.Y > Left.AbsoluteWindowSize.Y
-			end)
 
 			local items = {}
 
@@ -1649,16 +1621,6 @@ function lib:Create(ver, size, hidekey)
 				HueSelection.ZIndex = 105
 				HueSelection.Image = "http://www.roblox.com/asset/?id=4805639000"
 
-				--local UIStroke13 = Instance.new("UIStroke")
-				--UIStroke13.Color = Color3.fromRGB(255, 255, 255)
-				--UIStroke13.Transparency = 0.6000000238418579
-				--UIStroke13.Parent = Color
-
-				--local UIStroke_2 = Instance.new("UIStroke")
-				--UIStroke_2.Color = Color3.fromRGB(255, 255, 255)
-				--UIStroke_2.Transparency = 0.4000000059604645
-				--UIStroke_2.Parent = Hue
-
 				local ColorUIStroke = Instance.new("UIStroke")
 				ColorUIStroke.Name = "ColorUIStroke"
 				ColorUIStroke.Parent = ColorpickerFrame
@@ -1738,7 +1700,6 @@ function lib:Create(ver, size, hidekey)
 
 				local color_init = false
 				local in_out = false
-
 				ColorpickerFrame.MouseEnter:Connect(function()
 					LibraryFunctions:Tween(ColorUIStroke, {Color = Color3.fromRGB(87, 64, 198)}, 0.2)
 					color_init = true
@@ -2416,16 +2377,6 @@ function lib:Create(ver, size, hidekey)
 				DropdownDropFrameArrowHolder.BackgroundColor3 = Color3.fromRGB(107, 89, 222)
 				DropdownDropFrameArrowHolder.Position = UDim2.new(1, -2, 0.5, 0)
 				DropdownDropFrameArrowHolder.Size = UDim2.new(0, 14, 0, 16)
-
-				--[[local DropStroke = Instance.new("UIStroke")
-				DropStroke.Name = "DropdownStroke" 
-				DropStroke.Enabled = true
-				DropStroke.Parent = DropdownDropFrame
-				DropStroke.Color = Color3.fromRGB(56, 45, 109)
-				DropStroke.LineJoinMode = Enum.LineJoinMode.Round
-				DropStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
-				DropStroke.Thickness = 0.835
-				DropStroke.Transparency = 0]]
 				
 				local DropdownDropFrameArrowHolderCorner = Instance.new("UICorner")
 				DropdownDropFrameArrowHolderCorner.CornerRadius = UDim.new(0, 4)

@@ -1087,6 +1087,17 @@ function lib:Create(ver, size, hidekey)
 			SubTabBtnTitle.TextSize = 12.000
 			SubTabBtnTitle.TextXAlignment = Enum.TextXAlignment.Right
 
+
+			local LeftMain = Instance.new("Frame")
+			LeftMain.Name = "LeftMain"
+			LeftMain.Parent = AllSubPagesFolder
+			LeftMain.AnchorPoint = Vector2.new(0, 0.5)
+			LeftMain.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			LeftMain.BackgroundTransparency = 1.000
+			LeftMain.Position = UDim2.new(0, 0, 0.5, 0)
+			LeftMain.Size = UDim2.new(0.5, 0, 1, 0)
+			LeftMain.Visible = true
+
 			local Left = Instance.new("ScrollingFrame")
 			Left.Name = "Left"
 			Left.Parent = AllSubPagesFolder
@@ -1112,9 +1123,19 @@ function lib:Create(ver, size, hidekey)
 			LeftListing.SortOrder = Enum.SortOrder.LayoutOrder
 			LeftListing.Padding = UDim.new(0, 1)
 
+			local RightMain = Instance.new("Frame")
+			RightMain.Name = "RightMain"
+			RightMain.Parent = AllSubPagesFolder
+			RightMain.AnchorPoint = Vector2.new(0, 0.5)
+			RightMain.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			RightMain.BackgroundTransparency = 1.000
+			RightMain.Position = UDim2.new(0, 0, 0.5, 0)
+			RightMain.Size = UDim2.new(0.5, 0, 1, 0)
+			RightMain.Visible = true
+			
 			local Right = Instance.new("ScrollingFrame")
 			Right.Name = "Right"
-			Right.Parent = AllSubPagesFolder
+			Right.Parent = RightMain
 			Right.AnchorPoint = Vector2.new(1, 0.5)
 			Right.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			Right.BackgroundTransparency = 1.000
@@ -1567,8 +1588,7 @@ function lib:Create(ver, size, hidekey)
 				ColorpickerHandler.Position = UDim2.new(0.022580646, 0, 0.285382837, 0)
 				ColorpickerHandler.Size = UDim2.new(0, 310, 0, 30)				
 
-				local x,y = GetMouseLocation()
-				
+					
 				local ColorpickerFrame = Instance.new("Frame")
 				ColorpickerFrame.Name = "ColorpickerFrame"
 				ColorpickerFrame.Parent = Colorpicker --lel
@@ -1576,7 +1596,7 @@ function lib:Create(ver, size, hidekey)
 				ColorpickerFrame.BorderSizePixel = 0
 				ColorpickerFrame.Visible = false
 				ColorpickerFrame.ClipsDescendants = true
-				ColorpickerFrame.Position = UDim2.new(x, 0, y, 0) --UDim2.new(0.999, 0,0.289, 0)
+				ColorpickerFrame.Position = UDim2.new(1, 0,0.3, 0)
 				ColorpickerFrame.ZIndex = 104 -- Burada kaldım sikik kod
 				ColorpickerFrame.Size = UDim2.new(0, 175, 0, 0)
 				

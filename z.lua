@@ -1106,6 +1106,7 @@ function lib:Create(ver, size, hidekey)
 			Left.BackgroundTransparency = 1.000
 			Left.Position = UDim2.new(0, 0, 0.5, 0)
 			Left.Size = UDim2.new(0.5, 0, 1, 0)
+			Left.Visible = false
 			--Left.ZIndex = 4
 			-- 
 			Left.BorderSizePixel = 0
@@ -1120,15 +1121,6 @@ function lib:Create(ver, size, hidekey)
 			LeftListing.HorizontalAlignment = Enum.HorizontalAlignment.Left
 			LeftListing.SortOrder = Enum.SortOrder.LayoutOrder
 			LeftListing.Padding = UDim.new(0, 1)
-
-			--[[local RightMain = Instance.new("Frame")
-			RightMain.Name = "RightMain"
-			RightMain.Parent = AllSubPagesFolder
-			RightMain.AnchorPoint = Vector2.new(0, 0.5)
-			RightMain.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			RightMain.BackgroundTransparency = 1.000
-			RightMain.Position = UDim2.new(0, 0, 0.5, 0)
-			RightMain.Size = UDim2.new(0.5, 0, 1, 0)]]
 			
 			local Right = Instance.new("ScrollingFrame")
 			Right.Name = "Right"

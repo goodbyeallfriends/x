@@ -1270,7 +1270,7 @@ function lib:Create(ver, size, hidekey)
 				return label
 			end
 
-			function items:Toggle(side, text, config, keybind, callback)
+			function items:Toggle(side, text, config, callback)
 				text = text or "N/A"
 				callback = callback or function() end
 				local config = config or false 
@@ -1358,6 +1358,20 @@ function lib:Create(ver, size, hidekey)
 					end
 				end)
 
+				ToggleInteract.MouseButton1Click:Connect(function()
+					if toggled == false then
+						toggled = true
+						TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 20, 0.5, 0)}):Play()
+						TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(107, 89, 222)}):Play()
+					else
+						toggled = false
+						TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 3, 0.5, 0)}):Play()
+						TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(33, 28, 64)}):Play()
+					end
+					pcall(callback, toggled)
+				end)
+
+						
 				-- // Toggle Settings 
 				if config == true then
 					toggled = true
@@ -1376,19 +1390,6 @@ function lib:Create(ver, size, hidekey)
 					TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 3, 0.5, 0)}):Play()
 					TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(33, 28, 64)}):Play()
 				end 
-
-				ToggleInteract.MouseButton1Click:Connect(function()
-					if toggled == false then
-						toggled = true
-						TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 20, 0.5, 0)}):Play()
-						TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(107, 89, 222)}):Play()
-					else
-						toggled = false
-						TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 3, 0.5, 0)}):Play()
-						TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(33, 28, 64)}):Play()
-					end
-					pcall(callback, toggled)
-				end)
 
 				if side == 'Left' then
 					Toggle.Parent = Left

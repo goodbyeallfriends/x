@@ -42,6 +42,27 @@ function LibraryFunctions:Hovering(a)
 	return (M.X >= P.X and M.X <= P.X + S.X) and (M.Y >= P.Y and M.Y <= P.Y + S.Y)
 end
 
+function LibraryFunctions:GetSize(frame)
+	local size = 0;
+	for i=1,#frame do
+		local s = frame:sub(i,i)
+		if string.upper(s) == s then
+			if s == 'I' then
+				size+=4
+			else
+				size+=12;
+			end
+		else
+			if s == 'i' then
+				size+= 4
+			else
+				size += 10
+			end
+		end
+	end
+	return size
+end
+
 function LibraryFunctions:Round(Number, Increment)
 	local Bracket = 1 / Increment
 	return math.round(Number * Bracket) / Bracket
@@ -1067,7 +1088,7 @@ function lib:Create(ver, size, hidekey)
 			SubTabBtnTitle.TextSize = 12.000
 			SubTabBtnTitle.TextXAlignment = Enum.TextXAlignment.Right
 
-			local Left = Instance.new("Frame")
+			local Left = Instance.new("ScrollingFrame")
 			Left.Name = "Left"
 			Left.Parent = AllSubPagesFolder
 			Left.AnchorPoint = Vector2.new(0, 0.5)
@@ -1076,6 +1097,14 @@ function lib:Create(ver, size, hidekey)
 			Left.Position = UDim2.new(0, 0, 0.5, 0)
 			Left.Size = UDim2.new(0.5, 0, 1, 0)
 			Left.Visible = false
+			--Left.ZIndex = 4
+			-- 
+			Left.BorderSizePixel = 0
+			Left.ScrollBarImageColor3 = Color3.new(0.254902, 0.254902, 0.254902)
+			Left.CanvasSize = UDim2.new(0, 0, 0, 0)
+			Left.ScrollBarThickness = 0
+			Left.BorderColor3 = Color3.new(0, 0, 0)
+			
 
 			local LeftListing = Instance.new("UIListLayout")
 			LeftListing.Name = "LeftListing"
@@ -1084,7 +1113,7 @@ function lib:Create(ver, size, hidekey)
 			LeftListing.SortOrder = Enum.SortOrder.LayoutOrder
 			LeftListing.Padding = UDim.new(0, 1)
 
-			local Right = Instance.new("Frame")
+			local Right = Instance.new("ScrollingFrame")
 			Right.Name = "Right"
 			Right.Parent = AllSubPagesFolder
 			Right.AnchorPoint = Vector2.new(1, 0.5)
@@ -1093,6 +1122,12 @@ function lib:Create(ver, size, hidekey)
 			Right.Position = UDim2.new(1, -1, 0.5, 0)
 			Right.Size = UDim2.new(0.5, -2, 1, 0)
 			Right.Visible = false
+			--Right.ZIndex = 4
+			Right.BorderSizePixel = 0
+			--Right.CanvasSize = UDim2.new(0, 0, 0, 0)
+			Right.ScrollBarThickness = 0
+			Right.BorderColor3 = Color3.new(0, 0, 0)
+
 
 			local RightListing = Instance.new("UIListLayout")
 			RightListing.Name = "RightListing"
@@ -1112,6 +1147,20 @@ function lib:Create(ver, size, hidekey)
 			SubPageFade.ZIndex = 99
 			SubPageFade.Visible = true
 
+			local FadeImage = Instance.new("ImageLabel",PageItems)
+			FadeImage["Name"] = "FadeImage"
+			FadeImage["ImageColor3"] = Color3.new(0.0901961, 0.0784314, 0.160784)
+			FadeImage["BorderColor3"] = Color3.new(0, 0, 0)
+			FadeImage["AnchorPoint"] = Vector2.new(0, 1)
+			FadeImage["Image"] = "rbxassetid://7783533907"
+			FadeImage["ImageTransparency"] = 1
+			FadeImage["BackgroundTransparency"] = 1
+			FadeImage["Position"] = UDim2.new(0, 0, 1, 0)
+			FadeImage["Size"] = UDim2.new(1, -2, 0.1, 20) -- UDim2.new(1, -2, 0.207977235, 20)
+			FadeImage["ZIndex"] = 4
+			FadeImage["BorderSizePixel"] = 0
+			FadeImage["BackgroundColor3"] = Color3.new(0, 0, 0)
+			
 			SubTabBtnInteract.MouseButton1Click:Connect(function()
 				for i, v in next, AllSubPagesFolder:GetChildren() do
 					coroutine.wrap(function()
@@ -1120,6 +1169,7 @@ function lib:Create(ver, size, hidekey)
 					end)()
 				end
 				coroutine.wrap(function()
+					LibraryFunctions:Tween(FadeImage,{ImageTransparency=0},2)
 					wait(lib.Animations.AnimSpeed)
 					Left.Visible = true
 					Right.Visible = true
@@ -1138,7 +1188,18 @@ function lib:Create(ver, size, hidekey)
 				end
 				game.TweenService:Create(SubTabBtnInline, TweenInfo.new(lib.Animations.AnimSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundColor3 = Color3.fromRGB(107, 89, 222)}):Play()
 			end)
+			
+			Left.LeftListing:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+				Left.CanvasSize = UDim2.new(0, Left.LeftListing.AbsoluteContentSize.X, 0, Left.LeftListing.AbsoluteContentSize.Y)
+			end)
+			Right.RightListing:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+				Right.CanvasSize = UDim2.new(0, Right.RightListing.AbsoluteContentSize.X, 0, Right.RightListing.AbsoluteContentSize.Y)
+			end)
 
+			--if Left.CanvasSize == v(0, 222) then
+			--	LibraryFunctions:Tween(FadeImage,{ImageTransparency=1},1)
+			--end
+			
 			local items = {}
 
 			function items:Label(side, text, image)
@@ -1209,9 +1270,12 @@ function lib:Create(ver, size, hidekey)
 				return label
 			end
 
-			function items:Toggle(side, text, config, callback)
+			function items:Toggle(side, text, config, keybind, callback)
+				text = text or "N/A"
+				callback = callback or function() end
 				local config = config or false 
 				local toggled = config
+				
 				local Toggle = Instance.new("Frame")
 				Toggle.Name = tostring(text)
 				Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1281,11 +1345,8 @@ function lib:Create(ver, size, hidekey)
 				ToggleInteract.Text = ""
 				ToggleInteract.TextColor3 = Color3.fromRGB(0, 0, 0)
 				ToggleInteract.TextSize = 14.000
+			
 
-				if toggled == true then
-					ToggleTitle.TextColor3 = Color3.fromRGB(255,255,255)
-				end
-		
 				ToggleInteract.MouseEnter:Connect(function()
 					if toggled == false then
 						TweenService:Create(ToggleTitle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextColor3 = Color3.fromRGB(255,255,255)}):Play()
@@ -1297,6 +1358,24 @@ function lib:Create(ver, size, hidekey)
 					end
 				end)
 
+				-- // Toggle Settings 
+				if config == true then
+					toggled = true
+					ToggleTitle.TextColor3 = Color3.fromRGB(255,255,255)
+					TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 20, 0.5, 0)}):Play()
+					TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(107, 89, 222)}):Play()
+					pcall(callback, toggled)
+				end 
+				if config == false then
+					toggled = false
+					TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 3, 0.5, 0)}):Play()
+					TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(33, 28, 64)}):Play()
+				end
+				if not config or config == nil then 
+					toggled = false
+					TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 3, 0.5, 0)}):Play()
+					TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(33, 28, 64)}):Play()
+				end 
 
 				ToggleInteract.MouseButton1Click:Connect(function()
 					if toggled == false then
@@ -1311,26 +1390,6 @@ function lib:Create(ver, size, hidekey)
 					pcall(callback, toggled)
 				end)
 
-
-				-- // Toggle Settings System 
-				if config == true then -- Config Toggled
-					toggled = true
-					TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 20, 0.5, 0)}):Play()
-					TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(107, 89, 222)}):Play()
-					pcall(callback, toggled)
-				end 
-				if config == nil or false then -- Config Not Toggled
-					toggled = false
-					TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 3, 0.5, 0)}):Play()
-					TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(33, 28, 64)}):Play()
-				end
-
-				if not config == true or false then -- Config Nil 
-					toggled = false
-					TweenService:Create(ToggleFrameCircle, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0, 3, 0.5, 0)}):Play()
-					TweenService:Create(ToggleFrameBack, TweenInfo.new(lib.Animations.ElementsAS, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(33, 28, 64)}):Play()
-				end 
-
 				if side == 'Left' then
 					Toggle.Parent = Left
 				elseif side == 'Right' then
@@ -1340,6 +1399,7 @@ function lib:Create(ver, size, hidekey)
 					print('please select a side for the ' .. text .. ' toggle')
 				end
 			end
+			
 			function items:CounterLabel(side, text, arrow)
 				text = text or "CounterLabel N/A"
 				local CounterLabel = Instance.new("Frame")
@@ -1472,15 +1532,25 @@ function lib:Create(ver, size, hidekey)
 				ColorpickerCorner.Name = "ColorpickerCorner"
 				ColorpickerCorner.Parent = Colorpicker
 
+				-- sorun burada (galiba)
+				local ColorpickerHandler = Instance.new("Frame") -- yeni ekledim
+				ColorpickerHandler.Name = "Handler"
+				ColorpickerHandler.Parent = Colorpicker
+				ColorpickerHandler.BackgroundTransparency = 1
+				ColorpickerHandler.Position = UDim2.new(0.022580646, 0, 0.285382837, 0)
+				ColorpickerHandler.Size = UDim2.new(0, 310, 0, 30)				
+
+				local x,y = GetMouseLocation()
+				
 				local ColorpickerFrame = Instance.new("Frame")
 				ColorpickerFrame.Name = "ColorpickerFrame"
-				ColorpickerFrame.Parent = Colorpicker
+				ColorpickerFrame.Parent = Colorpicker --lel
 				ColorpickerFrame.BackgroundColor3 = Color3.fromRGB(23, 20, 46)
 				ColorpickerFrame.BorderSizePixel = 0
 				ColorpickerFrame.Visible = false
 				ColorpickerFrame.ClipsDescendants = true
-				ColorpickerFrame.Position = UDim2.new(0.999, 0,0.289, 0)
-				ColorpickerFrame.ZIndex = 3 -- Burada kaldım sikik kod
+				ColorpickerFrame.Position = UDim2.new(x, 0, y, 0) --UDim2.new(0.999, 0,0.289, 0)
+				ColorpickerFrame.ZIndex = 104 -- Burada kaldım sikik kod
 				ColorpickerFrame.Size = UDim2.new(0, 175, 0, 0)
 				
 				local ColorPickerFrameCorner = Instance.new("UICorner")
@@ -1494,7 +1564,7 @@ function lib:Create(ver, size, hidekey)
 				Color.BorderSizePixel = 0
 				Color.Position = UDim2.new(0, 9, 0, 9)
 				Color.Size = UDim2.new(0, 138, 0, 134)
-				Color.ZIndex = 10
+				Color.ZIndex = 104
 				Color.Image = "rbxassetid://4155801252"
 
 				local ColorCorner = Instance.new("UICorner")
@@ -1506,7 +1576,7 @@ function lib:Create(ver, size, hidekey)
 				ColorSelection.Name = "ColorSelection"
 				ColorSelection.Parent = Color
 				ColorSelection.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				ColorSelection.ZIndex = 25
+				ColorSelection.ZIndex = 104
 				ColorSelection.AnchorPoint = Vector2.new(0.5, 0.5)
 				ColorSelection.BackgroundTransparency = 1.000
 				ColorSelection.Position = UDim2.new(preset and select(3, Color3.toHSV(preset)))
@@ -1516,7 +1586,7 @@ function lib:Create(ver, size, hidekey)
 
 				local Hue = Instance.new("ImageLabel")
 				Hue.Name = "Hue"
-				Hue.ZIndex = 4
+				Hue.ZIndex = 104
 				Hue.Parent = ColorpickerFrame
 				Hue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				Hue.Position = UDim2.new(0, 157, 0, 9)
@@ -1541,7 +1611,7 @@ function lib:Create(ver, size, hidekey)
 				HueSelection.BackgroundTransparency = 1.000
 				HueSelection.Position = UDim2.new(0.48, 0, 1 - select(1, Color3.toHSV(preset)))
 				HueSelection.Size = UDim2.new(0, 15, 0, 15)
-				HueSelection.ZIndex = 5
+				HueSelection.ZIndex = 105
 				HueSelection.Image = "http://www.roblox.com/asset/?id=4805639000"
 
 				--local UIStroke13 = Instance.new("UIStroke")

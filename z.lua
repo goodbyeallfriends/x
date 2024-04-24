@@ -1191,10 +1191,10 @@ function lib:Create(ver, size, hidekey)
 			--	Left.CanvasSize = UDim2.new(0, LeftListing.AbsoluteContentSize.X, 0, LeftListing.AbsoluteContentSize.Y)
 			--end)
 
-			LibraryFunctions:Connect(LeftListing:GetPropertyChangedSignal("AbsoluteCanvasSize"), function()
+			LibraryFunctions:Connect(LeftListing:GetPropertyChangedSignal("AbsoluteContentSize"), function()
 				Left.CanvasSize = UDim2.new(0, LeftListing.AbsoluteContentSize.X, 0, LeftListing.AbsoluteContentSize.Y)
 			end)
-			LibraryFunctions:Connect(RightListing:GetPropertyChangedSignal("AbsoluteCanvasSize"), function()
+			LibraryFunctions:Connect(RightListing:GetPropertyChangedSignal("AbsoluteContentSize"), function()
 				Right.CanvasSize = UDim2.new(0, RightListing.AbsoluteContentSize.X, 0, RightListing.AbsoluteContentSize.Y)
 			end)
 

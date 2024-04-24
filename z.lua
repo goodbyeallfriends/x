@@ -1168,14 +1168,15 @@ function lib:Create(ver, size, hidekey)
 			FadeImage2["BorderColor3"] = Color3.new(0, 0, 0)
 			FadeImage2["AnchorPoint"] = Vector2.new(0, 1)
 			FadeImage2["Image"] = "rbxassetid://7783533907"
-			FadeImage2["ImageTransparency"] = 1
+			--FadeImage2["ImageTransparency"] = 1
 			FadeImage2["BackgroundTransparency"] = 1
 			FadeImage2["Position"] = UDim2.new(0, 0, 1, 0)
 			FadeImage2["Size"] = UDim2.new(1, -2, 0.1, 20) -- UDim2.new(1, -2, 0.207977235, 20)
 			FadeImage2["ZIndex"] = 4
+			FadeImage2["Visible"] = false
 			FadeImage2["BorderSizePixel"] = 0
 			FadeImage2["BackgroundColor3"] = Color3.new(0, 0, 0)
-			
+
 			SubTabBtnInteract.MouseButton1Click:Connect(function()
 				for i, v in next, AllSubPagesFolder:GetChildren() do
 					coroutine.wrap(function()
@@ -1184,7 +1185,7 @@ function lib:Create(ver, size, hidekey)
 					end)()
 				end
 				coroutine.wrap(function()
-					LibraryFunctions:Tween(FadeImage2,{ImageTransparency=0},2)
+					--LibraryFunctions:Tween(FadeImage2,{ImageTransparency=0},2)
 					wait(lib.Animations.AnimSpeed)
 					Left.Visible = true
 					Right.Visible = true

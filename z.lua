@@ -1162,7 +1162,7 @@ function lib:Create(ver, size, hidekey)
 			FadeImage1["BackgroundColor3"] = Color3.new(0, 0, 0)]]
 
 			
-			local FadeImage22 = Instance.new("ImageLabel",PageItems)
+			local FadeImage2 = Instance.new("ImageLabel",PageItems)
 			FadeImage2["Name"] = "FadeImage2"
 			FadeImage2["ImageColor3"] = Color3.new(0.0901961, 0.0784314, 0.160784)
 			FadeImage2["BorderColor3"] = Color3.new(0, 0, 0)

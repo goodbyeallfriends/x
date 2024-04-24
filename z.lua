@@ -24,10 +24,9 @@ function LibraryFunctions:Create(Class, Properties)
 end
 
 function LibraryFunctions:GetMouseLocation(Inset)
-	local Location = InputService:GetMouseLocation()
-	if not Inset then Location -= Vector2.new(0, 36) end
-	return Location
+	InputService:GetMouseLocation()
 end
+
 
 function LibraryFunctions:Connect(Signal, Function)
 	local Connection = Signal:Connect(Function)
@@ -1147,19 +1146,35 @@ function lib:Create(ver, size, hidekey)
 			SubPageFade.ZIndex = 99
 			SubPageFade.Visible = true
 
-			local FadeImage = Instance.new("ImageLabel",PageItems)
-			FadeImage["Name"] = "FadeImage"
-			FadeImage["ImageColor3"] = Color3.new(0.0901961, 0.0784314, 0.160784)
-			FadeImage["BorderColor3"] = Color3.new(0, 0, 0)
-			FadeImage["AnchorPoint"] = Vector2.new(0, 1)
-			FadeImage["Image"] = "rbxassetid://7783533907"
-			FadeImage["ImageTransparency"] = 1
-			FadeImage["BackgroundTransparency"] = 1
-			FadeImage["Position"] = UDim2.new(0, 0, 1, 0)
-			FadeImage["Size"] = UDim2.new(1, -2, 0.1, 20) -- UDim2.new(1, -2, 0.207977235, 20)
-			FadeImage["ZIndex"] = 4
-			FadeImage["BorderSizePixel"] = 0
-			FadeImage["BackgroundColor3"] = Color3.new(0, 0, 0)
+
+			--[[local FadeImage1 = Instance.new("ImageLabel",PageItems)
+			FadeImage1["Name"] = "FadeImage1"
+			FadeImage1["ImageColor3"] = Color3.new(0.0901961, 0.0784314, 0.160784)
+			FadeImage1["BorderColor3"] = Color3.new(0, 0, 0)
+			FadeImage1["AnchorPoint"] = Vector2.new(0, 1)
+			FadeImage1["Image"] = "rbxassetid://7783533907"
+			FadeImage1["ImageTransparency"] = 1
+			FadeImage1["BackgroundTransparency"] = 1
+			FadeImage1["Position"] = UDim2.new(0, 0, 1, 0)
+			FadeImage1["Size"] = UDim2.new(1, -2, 0.1, 20) -- UDim2.new(1, -2, 0.207977235, 20)
+			FadeImage1["ZIndex"] = 4
+			FadeImage1["BorderSizePixel"] = 0
+			FadeImage1["BackgroundColor3"] = Color3.new(0, 0, 0)]]
+
+			
+			local FadeImage22 = Instance.new("ImageLabel",PageItems)
+			FadeImage2["Name"] = "FadeImage2"
+			FadeImage2["ImageColor3"] = Color3.new(0.0901961, 0.0784314, 0.160784)
+			FadeImage2["BorderColor3"] = Color3.new(0, 0, 0)
+			FadeImage2["AnchorPoint"] = Vector2.new(0, 1)
+			FadeImage2["Image"] = "rbxassetid://7783533907"
+			FadeImage2["ImageTransparency"] = 1
+			FadeImage2["BackgroundTransparency"] = 1
+			FadeImage2["Position"] = UDim2.new(0, 0, 1, 0)
+			FadeImage2["Size"] = UDim2.new(1, -2, 0.1, 20) -- UDim2.new(1, -2, 0.207977235, 20)
+			FadeImage2["ZIndex"] = 4
+			FadeImage2["BorderSizePixel"] = 0
+			FadeImage2["BackgroundColor3"] = Color3.new(0, 0, 0)
 			
 			SubTabBtnInteract.MouseButton1Click:Connect(function()
 				for i, v in next, AllSubPagesFolder:GetChildren() do
@@ -1169,7 +1184,7 @@ function lib:Create(ver, size, hidekey)
 					end)()
 				end
 				coroutine.wrap(function()
-					LibraryFunctions:Tween(FadeImage,{ImageTransparency=0},2)
+					LibraryFunctions:Tween(FadeImage2,{ImageTransparency=0},2)
 					wait(lib.Animations.AnimSpeed)
 					Left.Visible = true
 					Right.Visible = true
@@ -1196,10 +1211,20 @@ function lib:Create(ver, size, hidekey)
 				Right.CanvasSize = UDim2.new(0, Right.RightListing.AbsoluteContentSize.X, 0, Right.RightListing.AbsoluteContentSize.Y)
 			end)
 
+			--LibraryFunctions:Connect(path_here.heree.:GetPropertyChangedSignal("AbsoluteCanvasSize"), function()
+			--end)
+
 			--if Left.CanvasSize == v(0, 222) then
-			--	LibraryFunctions:Tween(FadeImage,{ImageTransparency=1},1)
+			--	LibraryFunctions:Tween(FadeImage2,{ImageTransparency=1},1)
 			--end
 			
+			LibraryFunctions:Connect(Left:GetPropertyChangedSignal("AbsoluteCanvasSize"), function()
+				--FadeImage1.Visible = Left.AbsoluteCanvasSize.Y > Left.AbsoluteWindowSize.Y
+				FadeImage2.Visible = Left.AbsoluteCanvasSize.Y > Left.AbsoluteWindowSize.Y
+
+				--Holder_Extra_Bar.Visible = Left.AbsoluteCanvasSize.Y > Left.AbsoluteWindowSize.Y
+			end)
+
 			local items = {}
 
 			function items:Label(side, text, image)
@@ -2808,4 +2833,3 @@ end
 
 getgenv().library = lib
 return lib
-

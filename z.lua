@@ -1088,7 +1088,7 @@ function lib:Create(ver, size, hidekey)
 			SubTabBtnTitle.TextXAlignment = Enum.TextXAlignment.Right
 
 
-			local LeftMain = Instance.new("Frame")
+			--[[local LeftMain = Instance.new("Frame")
 			LeftMain.Name = "LeftMain"
 			LeftMain.Parent = AllSubPagesFolder
 			LeftMain.AnchorPoint = Vector2.new(0, 0.5)
@@ -1096,11 +1096,11 @@ function lib:Create(ver, size, hidekey)
 			LeftMain.BackgroundTransparency = 1.000
 			LeftMain.Position = UDim2.new(0, 0, 0.5, 0)
 			LeftMain.Size = UDim2.new(0.5, 0, 1, 0)
-			LeftMain.Visible = true
+			LeftMain.Visible = true]]
 
 			local Left = Instance.new("ScrollingFrame")
 			Left.Name = "Left"
-			Left.Parent = LeftMain
+			Left.Parent = AllSubPagesFolder
 			Left.AnchorPoint = Vector2.new(0, 0.5)
 			Left.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			Left.BackgroundTransparency = 1.000
@@ -1121,18 +1121,18 @@ function lib:Create(ver, size, hidekey)
 			LeftListing.SortOrder = Enum.SortOrder.LayoutOrder
 			LeftListing.Padding = UDim.new(0, 1)
 
-			local RightMain = Instance.new("Frame")
+			--[[local RightMain = Instance.new("Frame")
 			RightMain.Name = "RightMain"
 			RightMain.Parent = AllSubPagesFolder
 			RightMain.AnchorPoint = Vector2.new(0, 0.5)
 			RightMain.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			RightMain.BackgroundTransparency = 1.000
 			RightMain.Position = UDim2.new(0, 0, 0.5, 0)
-			RightMain.Size = UDim2.new(0.5, 0, 1, 0)
+			RightMain.Size = UDim2.new(0.5, 0, 1, 0)]]
 			
 			local Right = Instance.new("ScrollingFrame")
 			Right.Name = "Right"
-			Right.Parent = RightMain
+			Right.Parent = AllSubPagesFolder
 			Right.AnchorPoint = Vector2.new(1, 0.5)
 			Right.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			Right.BackgroundTransparency = 1.000

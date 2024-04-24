@@ -1100,7 +1100,7 @@ function lib:Create(ver, size, hidekey)
 
 			local Left = Instance.new("ScrollingFrame")
 			Left.Name = "Left"
-			Left.Parent = AllSubPagesFolder
+			Left.Parent = LeftMain
 			Left.AnchorPoint = Vector2.new(0, 0.5)
 			Left.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			Left.BackgroundTransparency = 1.000

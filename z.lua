@@ -1106,7 +1106,6 @@ function lib:Create(ver, size, hidekey)
 			Left.BackgroundTransparency = 1.000
 			Left.Position = UDim2.new(0, 0, 0.5, 0)
 			Left.Size = UDim2.new(0.5, 0, 1, 0)
-			Left.Visible = false
 			--Left.ZIndex = 4
 			-- 
 			Left.BorderSizePixel = 0
@@ -1114,7 +1113,6 @@ function lib:Create(ver, size, hidekey)
 			Left.CanvasSize = UDim2.new(0, 0, 0, 0)
 			Left.ScrollBarThickness = 0
 			Left.BorderColor3 = Color3.new(0, 0, 0)
-			
 
 			local LeftListing = Instance.new("UIListLayout")
 			LeftListing.Name = "LeftListing"
@@ -1131,7 +1129,6 @@ function lib:Create(ver, size, hidekey)
 			RightMain.BackgroundTransparency = 1.000
 			RightMain.Position = UDim2.new(0, 0, 0.5, 0)
 			RightMain.Size = UDim2.new(0.5, 0, 1, 0)
-			RightMain.Visible = true
 			
 			local Right = Instance.new("ScrollingFrame")
 			Right.Name = "Right"
@@ -1147,7 +1144,6 @@ function lib:Create(ver, size, hidekey)
 			--Right.CanvasSize = UDim2.new(0, 0, 0, 0)
 			Right.ScrollBarThickness = 0
 			Right.BorderColor3 = Color3.new(0, 0, 0)
-
 
 			local RightListing = Instance.new("UIListLayout")
 			RightListing.Name = "RightListing"

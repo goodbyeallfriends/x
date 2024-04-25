@@ -41,27 +41,6 @@ function LibraryFunctions:Hovering(a)
 	return (M.X >= P.X and M.X <= P.X + S.X) and (M.Y >= P.Y and M.Y <= P.Y + S.Y)
 end
 
-function LibraryFunctions:GetSize(frame)
-	local size = 0;
-	for i=1,#frame do
-		local s = frame:sub(i,i)
-		if string.upper(s) == s then
-			if s == 'I' then
-				size+=4
-			else
-				size+=12;
-			end
-		else
-			if s == 'i' then
-				size+= 4
-			else
-				size += 10
-			end
-		end
-	end
-	return size
-end
-
 function LibraryFunctions:Round(Number, Increment)
 	local Bracket = 1 / Increment
 	return math.round(Number * Bracket) / Bracket

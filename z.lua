@@ -1518,19 +1518,10 @@ function lib:Create(ver, size, hidekey)
 				ColorpickerCorner.CornerRadius = UDim.new(0, 6)
 				ColorpickerCorner.Name = "ColorpickerCorner"
 				ColorpickerCorner.Parent = Colorpicker
-
-				-- sorun burada (galiba)
-				local ColorpickerHandler = Instance.new("Frame") -- yeni ekledim
-				ColorpickerHandler.Name = "Handler"
-				ColorpickerHandler.Parent = Colorpicker
-				ColorpickerHandler.BackgroundTransparency = 1
-				ColorpickerHandler.Position = UDim2.new(0.022580646, 0, 0.285382837, 0)
-				ColorpickerHandler.Size = UDim2.new(0, 310, 0, 30)				
-
 					
 				local ColorpickerFrame = Instance.new("Frame")
 				ColorpickerFrame.Name = "ColorpickerFrame"
-				ColorpickerFrame.Parent = Colorpicker --lel
+				ColorpickerFrame.Parent = PageItems --lel
 				ColorpickerFrame.BackgroundColor3 = Color3.fromRGB(23, 20, 46)
 				ColorpickerFrame.BorderSizePixel = 0
 				ColorpickerFrame.Visible = false
@@ -1541,6 +1532,7 @@ function lib:Create(ver, size, hidekey)
 				
 				local ColorPickerFrameCorner = Instance.new("UICorner")
 				ColorPickerFrameCorner.Name = "ColorPickerFrameCorner"
+				ColorPickerFrameCorner.CornerRadius = "0.3"
 				ColorPickerFrameCorner.Parent = ColorpickerFrame
 
 				local Color = Instance.new("ImageLabel")
@@ -2772,3 +2764,4 @@ end
 
 getgenv().library = lib
 return lib
+

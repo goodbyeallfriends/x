@@ -1068,6 +1068,7 @@ function lib:Create(ver, size, hidekey)
 
 			local Left = Instance.new("ScrollingFrame")
 			Left.Name = "Left"
+			Left.ClipsDescendants = false
 			Left.Parent = AllSubPagesFolder
 			Left.AnchorPoint = Vector2.new(0, 0.5)
 			Left.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1092,6 +1093,7 @@ function lib:Create(ver, size, hidekey)
 			
 			local Right = Instance.new("ScrollingFrame")
 			Right.Name = "Right"
+			Right.ClipsDescendants = false
 			Right.Parent = AllSubPagesFolder
 			Right.AnchorPoint = Vector2.new(1, 0.5)
 			Right.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1521,7 +1523,7 @@ function lib:Create(ver, size, hidekey)
 					
 				local ColorpickerFrame = Instance.new("Frame")
 				ColorpickerFrame.Name = "ColorpickerFrame"
-				ColorpickerFrame.Parent = PageItems --lel
+				ColorpickerFrame.Parent = Colorpicker --lel
 				ColorpickerFrame.BackgroundColor3 = Color3.fromRGB(23, 20, 46)
 				ColorpickerFrame.BorderSizePixel = 0
 				ColorpickerFrame.Visible = false
@@ -1532,7 +1534,7 @@ function lib:Create(ver, size, hidekey)
 				
 				local ColorPickerFrameCorner = Instance.new("UICorner")
 				ColorPickerFrameCorner.Name = "ColorPickerFrameCorner"
-				ColorPickerFrameCorner.CornerRadius = "0.3"
+				ColorPickerFrameCorner.CornerRadius = UDim.new(0, 4)
 				ColorPickerFrameCorner.Parent = ColorpickerFrame
 
 				local Color = Instance.new("ImageLabel")
@@ -2761,7 +2763,32 @@ function lib:Notify(title, desc, dur)
 		Notification:Destroy()
 	end)()
 end
-
+local Main = lib:Create('<font color="rgb(107, 89, 222)">VICE HUB</font>',  UDim2.new(0, 700, 0, 600), Enum.KeyCode.RightShift)
+local T2 = Main:Tab('LEGITBOT', 10063288907, 'Legitbot Options', 'Aimbot that tries to aim at opponents in the most humane way.')
+local T3 = Main:Tab('RAGEBOT', 10063358041, 'Ragebot Options', 'Aimbot that tries to kill opponents as quickly as possible.              <font color="rgb(255,0,0)"><b>USE AT OWN RISK</b></font> ')
+local T4 = Main:Tab('VISUAL', 10191671863, 'Visuals Customization', 'Allows you to customize entities and world.') 
+local T5 = Main:Tab('OTHERS', 10063472975, 'Other Settings', 'Misc options.') 
+-- ========= SUB TABS ===============
+local LegitTab    = T2:SubTab('Aimbot       ', 10063461239) --local T2ST2 = T2:SubTab('Misc', 10063472975)
+local TriggerTab  = T2:SubTab('Trigger      ', 10063480247)
+local RageTab     = T3:SubTab('Ragebot      ', 10063461239) 
+local AntiAimTab  = T3:SubTab('Anti Aim      ', 12501131079)
+local MiscTab     = T5:SubTab('Main        ', 10063341801)
+local MiscTab2    = T5:SubTab('Misc        ', 10063341801)
+local VisualTab   = T4:SubTab('Entities       ', 10257728029)
+local WorldTab    = T4:SubTab('World        ', 10246075923)
+local ViewTab     = T4:SubTab('View         ', 10246507314)
+LegitTab:Label('Left','Label')
+LegitTab:Toggle('Left','Toggled',true,function() end)
+LegitTab:Toggle('Left','Toggle',false,function() end)
+LegitTab:Colorpicker('Left','Colorpicker', Color3.fromRGB(255,0,255), function(vvv)  rint("value is: " .. vvv) end)
+LegitTab:Dropdown('Left','Dropdown', 'value', {"ok", "bye","nigger","see ya"}, function() end)
+LegitTab:Slider('Left','Slider', 10,1,1000,1, function(value) print(value) end)
+LegitTab:Dropdown('Left','Hitscan Priority', 'Head', {"Head", "Torso"}, function() end)
+LegitTab:CounterLabel('Left','DENEEMEE')
+LegitTab:CounterLabel('Left','DENEEMEE')
+LegitTab:CounterLabel('Left','DENEEMEE')
+LegitTab:CounterLabel('Left','DENEEMEE')
 getgenv().library = lib
 return lib
 

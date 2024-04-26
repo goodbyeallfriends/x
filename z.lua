@@ -2597,6 +2597,287 @@ function lib:Create(ver, size, hidekey)
 				end
 			end
 
+			function items:DROPDOWNTEST(side, text, default, options, cb)
+				local opened = false
+				assert(type(options) == "table", "options must be a table")
+				assert(type(cb) == "function", "callback must be a function")
+				
+				local DROPDOWNTEST = Instance.new("Frame")
+				DROPDOWNTEST.Name = text or ''
+				DROPDOWNTEST.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				DROPDOWNTEST.BackgroundTransparency = 1.000
+				DROPDOWNTEST.BorderColor3 = Color3.fromRGB(27, 42, 53)
+				DROPDOWNTEST.BorderSizePixel = 0
+				DROPDOWNTEST.Size = UDim2.new(1, 0, 0, 36)
+				
+				local DROPDOWNTESTOutline = Instance.new("UIStroke")
+				DROPDOWNTESTOutline.Enabled = true
+				DROPDOWNTESTOutline.Parent = DROPDOWNTEST
+				DROPDOWNTESTOutline.Color = Color3.fromRGB(31, 26, 61)
+				DROPDOWNTESTOutline.LineJoinMode = Enum.LineJoinMode.Miter
+				DROPDOWNTESTOutline.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+				DROPDOWNTESTOutline.Thickness = 1
+				DROPDOWNTESTOutline.Transparency = 1
+				
+				local DROPDOWNTESTTitle = Instance.new("TextLabel")
+				DROPDOWNTESTTitle.Name = "DROPDOWNTESTTitle"
+				DROPDOWNTESTTitle.Parent = DROPDOWNTEST
+				DROPDOWNTESTTitle.AnchorPoint = Vector2.new(0, 0.5)
+				DROPDOWNTESTTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				DROPDOWNTESTTitle.BackgroundTransparency = 1.000
+				DROPDOWNTESTTitle.ClipsDescendants = true
+				DROPDOWNTESTTitle.Position = UDim2.new(0, 21, 0.5, 0)
+				DROPDOWNTESTTitle.Size = UDim2.new(0, 180, 1, 0)
+				DROPDOWNTESTTitle.Font = Enum.Font.GothamMedium
+				DROPDOWNTESTTitle.Text = text
+				DROPDOWNTESTTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+				DROPDOWNTESTTitle.TextSize = 12.000
+				DROPDOWNTESTTitle.TextXAlignment = Enum.TextXAlignment.Left
+				
+				local DROPDOWNTESTDropFrame = Instance.new("Frame")
+				DROPDOWNTESTDropFrame.Name = "DROPDOWNTESTDropFrame"
+				DROPDOWNTESTDropFrame.Parent = DROPDOWNTEST
+				DROPDOWNTESTDropFrame.AnchorPoint = Vector2.new(1, 0.5)
+				DROPDOWNTESTDropFrame.BackgroundColor3 = Color3.fromRGB(34, 28, 64)
+				DROPDOWNTESTDropFrame.Position = UDim2.new(1, -12, 0.5, 0)
+				DROPDOWNTESTDropFrame.Size = UDim2.new(0, 173, 0, 22)
+				
+				local DROPDOWNTESTDropFrameCorner = Instance.new("UICorner")
+				DROPDOWNTESTDropFrameCorner.CornerRadius = UDim.new(0, 4)
+				DROPDOWNTESTDropFrameCorner.Name = "DROPDOWNTESTDropFrameCorner"
+				DROPDOWNTESTDropFrameCorner.Parent = DROPDOWNTESTDropFrame
+				
+				local DROPDOWNTESTInteract = Instance.new("TextButton")
+				DROPDOWNTESTInteract.Name = "DROPDOWNTESTInteract"
+				DROPDOWNTESTInteract.Parent = DROPDOWNTESTDropFrame
+				DROPDOWNTESTInteract.AnchorPoint = Vector2.new(0, 0.5)
+				DROPDOWNTESTInteract.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+				DROPDOWNTESTInteract.BorderColor3 = Color3.fromRGB(27, 42, 53)
+				DROPDOWNTESTInteract.Position = UDim2.new(0, 0, 0.5, 0)
+				DROPDOWNTESTInteract.Size = UDim2.new(1, 0, 1, 0)
+				DROPDOWNTESTInteract.AutoButtonColor = false
+				DROPDOWNTESTInteract.Font = Enum.Font.SourceSans
+				DROPDOWNTESTInteract.Text = ""
+				DROPDOWNTESTInteract.TextColor3 = Color3.fromRGB(0, 0, 0)
+				DROPDOWNTESTInteract.TextSize = 14.000
+				DROPDOWNTESTInteract.BackgroundTransparency = 1
+				
+				local DROPDOWNTESTDropFrameArrowHolder = Instance.new("Frame")
+				DROPDOWNTESTDropFrameArrowHolder.Name = "DROPDOWNTESTDropFrameArrowHolder"
+				DROPDOWNTESTDropFrameArrowHolder.Parent = DROPDOWNTESTDropFrame
+				DROPDOWNTESTDropFrameArrowHolder.AnchorPoint = Vector2.new(1, 0.5)
+				DROPDOWNTESTDropFrameArrowHolder.BackgroundColor3 = Color3.fromRGB(107, 89, 222)
+				DROPDOWNTESTDropFrameArrowHolder.Position = UDim2.new(1, -2, 0.5, 0)
+				DROPDOWNTESTDropFrameArrowHolder.Size = UDim2.new(0, 14, 0, 16)
+			
+				local DropStroke = Instance.new("UIStroke")
+				DropStroke.Enabled = true
+				DropStroke.Parent = DROPDOWNTESTDropFrame
+				DropStroke.Color = Color3.fromRGB(112, 74, 248)
+				DropStroke.LineJoinMode = Enum.LineJoinMode.Round
+				DropStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+				DropStroke.Thickness = 0.7
+				DropStroke.Transparency = 0
+
+				local DROPDOWNTESTDropFrameArrowHolderCorner = Instance.new("UICorner")
+				DROPDOWNTESTDropFrameArrowHolderCorner.CornerRadius = UDim.new(0, 4)
+				DROPDOWNTESTDropFrameArrowHolderCorner.Name = "DROPDOWNTESTDropFrameArrowHolderCorner"
+				DROPDOWNTESTDropFrameArrowHolderCorner.Parent = DROPDOWNTESTDropFrameArrowHolder
+				
+				local DROPDOWNTESTArrow = Instance.new("ImageLabel")
+				DROPDOWNTESTArrow.Name = "DROPDOWNTESTArrow"
+				DROPDOWNTESTArrow.Parent = DROPDOWNTESTDropFrameArrowHolder
+				DROPDOWNTESTArrow.AnchorPoint = Vector2.new(0.5, 0.5)
+				DROPDOWNTESTArrow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				DROPDOWNTESTArrow.BackgroundTransparency = 1.000
+				DROPDOWNTESTArrow.Position = UDim2.new(0.5, 0, 0.5, 0)
+				DROPDOWNTESTArrow.Size = UDim2.new(1, 0, 1, 0)
+				DROPDOWNTESTArrow.Image = "rbxassetid://10125383411"
+				
+				local DROPDOWNTESTSelected = Instance.new("TextLabel")
+				DROPDOWNTESTSelected.Name = "DROPDOWNTESTSelected"
+				DROPDOWNTESTSelected.Parent = DROPDOWNTESTDropFrame
+				DROPDOWNTESTSelected.AnchorPoint = Vector2.new(0, 0.5)
+				DROPDOWNTESTSelected.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				DROPDOWNTESTSelected.BackgroundTransparency = 1.000
+				DROPDOWNTESTSelected.ClipsDescendants = false
+				DROPDOWNTESTSelected.Position = UDim2.new(0, 4, 0.5, 0)
+				DROPDOWNTESTSelected.Size = UDim2.new(1, -24, 1, 0)
+				DROPDOWNTESTSelected.Visible = true
+				DROPDOWNTESTSelected.Font = Enum.Font.Gotham
+				DROPDOWNTESTSelected.Text = string.format(default)
+				DROPDOWNTESTSelected.TextColor3 = Color3.fromRGB(255, 255, 255)
+				DROPDOWNTESTSelected.TextSize = 12.000
+				DROPDOWNTESTSelected.TextXAlignment = Enum.TextXAlignment.Left
+				
+				local DROPDOWNTESTChildFrameOutline = Instance.new("Frame")
+				DROPDOWNTESTChildFrameOutline.Name = "DROPDOWNTESTChildFrame"
+				DROPDOWNTESTChildFrameOutline.Parent = DROPDOWNTESTDropFrame
+				DROPDOWNTESTChildFrameOutline.AnchorPoint = Vector2.new(0.5, 0)
+				DROPDOWNTESTChildFrameOutline.BackgroundColor3 = Color3.fromRGB(34, 28, 64)
+				DROPDOWNTESTChildFrameOutline.Position = UDim2.new(0.5, 0, 0, 0)
+				DROPDOWNTESTChildFrameOutline.Size = UDim2.new(1, 0, 0, 100)
+				DROPDOWNTESTChildFrameOutline.BackgroundTransparency = 1
+				DROPDOWNTESTChildFrameOutline.Visible = false
+				DROPDOWNTESTChildFrameOutline.ZIndex = 99
+				
+				local DROPDOWNTESTChildFrameOutlineCorner = Instance.new("UICorner")
+				DROPDOWNTESTChildFrameOutlineCorner.CornerRadius = UDim.new(0, 4)
+				DROPDOWNTESTChildFrameOutlineCorner.Name = "DROPDOWNTESTChildFrameOutlineCorner"
+				DROPDOWNTESTChildFrameOutlineCorner.Parent = DROPDOWNTESTChildFrameOutline
+				
+				local DROPDOWNTESTChildFrame = Instance.new("Frame")
+				DROPDOWNTESTChildFrame.Name = "DROPDOWNTESTChildFrame"
+				DROPDOWNTESTChildFrame.Parent = DROPDOWNTESTChildFrameOutline
+				DROPDOWNTESTChildFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+				DROPDOWNTESTChildFrame.BackgroundColor3 = Color3.fromRGB(22, 20, 45)
+				DROPDOWNTESTChildFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+				DROPDOWNTESTChildFrame.Size = UDim2.new(1, -2, 1, -2)
+				DROPDOWNTESTChildFrame.BackgroundTransparency = 1
+				DROPDOWNTESTChildFrame.ZIndex = 99
+				
+				local DROPDOWNTESTChildFrameCorner = Instance.new("UICorner")
+				DROPDOWNTESTChildFrameCorner.CornerRadius = UDim.new(0, 4)
+				DROPDOWNTESTChildFrameCorner.Name = "DROPDOWNTESTChildFrameCorner"
+				DROPDOWNTESTChildFrameCorner.Parent = DROPDOWNTESTChildFrame
+				
+				local DROPDOWNTESTChildFrameScroll = Instance.new("ScrollingFrame")
+				DROPDOWNTESTChildFrameScroll.Name = "DROPDOWNTESTChildFrameScroll"
+				DROPDOWNTESTChildFrameScroll.Parent = DROPDOWNTESTChildFrame
+				DROPDOWNTESTChildFrameScroll.Active = true
+				DROPDOWNTESTChildFrameScroll.AnchorPoint = Vector2.new(0.5, 0.5)
+				DROPDOWNTESTChildFrameScroll.BackgroundColor3 = Color3.fromRGB(33, 28, 64)
+				DROPDOWNTESTChildFrameScroll.BackgroundTransparency = 1.000
+				DROPDOWNTESTChildFrameScroll.BorderSizePixel = 0
+				DROPDOWNTESTChildFrameScroll.Position = UDim2.new(0.5, 0, 0.5, 0)
+				DROPDOWNTESTChildFrameScroll.Size = UDim2.new(1, 0, 1, -8)
+				DROPDOWNTESTChildFrameScroll.ScrollBarThickness = 0
+				DROPDOWNTESTChildFrameScroll.ZIndex = 99
+				
+				local DROPDOWNTESTChildFrameScrollListing = Instance.new("UIListLayout")
+				DROPDOWNTESTChildFrameScrollListing.Name = "DROPDOWNTESTChildFrameScrollListing"
+				DROPDOWNTESTChildFrameScrollListing.Parent = DROPDOWNTESTChildFrameScroll
+				DROPDOWNTESTChildFrameScrollListing.HorizontalAlignment = Enum.HorizontalAlignment.Center
+				DROPDOWNTESTChildFrameScrollListing.SortOrder = Enum.SortOrder.LayoutOrder
+				DROPDOWNTESTChildFrameScrollListing.Padding = UDim.new(0, 1)
+				
+				DROPDOWNTESTChildFrameScrollListing:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+					DROPDOWNTESTChildFrameScroll.CanvasSize = UDim2.new(0, 0, 0, DROPDOWNTESTChildFrameScrollListing.AbsoluteContentSize.Y) 
+				end)
+	
+				DROPDOWNTESTInteract.MouseEnter:Connect(function()
+					TweenService:Create(DROPDOWNTESTDropFrame, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(42, 34, 80)}):Play()
+				end)
+				DROPDOWNTESTInteract.MouseLeave:Connect(function()
+					TweenService:Create(DROPDOWNTESTDropFrame, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(34, 28, 64)}):Play()
+				end)
+				
+				local debounce = false
+
+				local function toggle()
+					DROPDOWNTESTChildFrameOutline.Visible = true
+					if (debounce) then return end
+
+					opened = not opened
+
+					if (not opened) then
+						debounce = true
+					end
+
+					local tween = TweenService:Create(DROPDOWNTESTChildFrame, TweenInfo.new(.2), {BackgroundTransparency = opened and 0 or 1})
+					TweenService:Create(DROPDOWNTESTChildFrameOutline, TweenInfo.new(.2), {BackgroundTransparency = opened and 0 or 1}):Play()
+					
+					for i,v in next, DROPDOWNTESTChildFrameScroll:GetDescendants() do
+						if v:IsA('TextButton') then
+							game.TweenService:Create(v, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = opened and 0 or 1}):Play()
+						end
+						if v:IsA('TextLabel') then
+							game.TweenService:Create(v, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = opened and 0 or 1}):Play()
+						end
+						if v:IsA('ImageLabel') then
+							game.TweenService:Create(v, TweenInfo.new(.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageTransparency = opened and 0 or 1}):Play()
+						end
+					end
+					
+					tween:Play()
+					if (not opened) then
+						wait(.2)
+						debounce = false
+					end
+
+					DROPDOWNTESTChildFrame.Visible = opened
+				end
+
+				DROPDOWNTESTInteract.InputBegan:Connect(function(inp)
+					if (inp.UserInputType == Enum.UserInputType.MouseButton1) then
+						toggle()
+					end
+				end)
+				
+				local pressed = false
+				for _, opt in next, options do
+					local DROPDOWNTESTBtn = Instance.new("TextButton")
+					DROPDOWNTESTBtn.Name = "DROPDOWNTESTBtn"
+					DROPDOWNTESTBtn.Parent = DROPDOWNTESTChildFrameScroll
+					DROPDOWNTESTBtn.BackgroundColor3 = Color3.fromRGB(22, 20, 45)
+					DROPDOWNTESTBtn.Size = UDim2.new(1, -8, 0, 22)
+					DROPDOWNTESTBtn.Font = Enum.Font.SourceSans
+					DROPDOWNTESTBtn.Text = ""
+					DROPDOWNTESTBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+					DROPDOWNTESTBtn.TextSize = 14.000
+					DROPDOWNTESTBtn.AutoButtonColor = false
+					DROPDOWNTESTBtn.BackgroundTransparency = 1
+					DROPDOWNTESTBtn.ZIndex = 99
+					
+					local DROPDOWNTESTBtnTitle = Instance.new("TextLabel")
+					DROPDOWNTESTBtnTitle.Name = "DROPDOWNTESTBtnTitle"
+					DROPDOWNTESTBtnTitle.Parent = DROPDOWNTESTBtn
+					DROPDOWNTESTBtnTitle.AnchorPoint = Vector2.new(1, 0.5)
+					DROPDOWNTESTBtnTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					DROPDOWNTESTBtnTitle.BackgroundTransparency = 1.000
+					DROPDOWNTESTBtnTitle.ClipsDescendants = true
+					DROPDOWNTESTBtnTitle.Position = UDim2.new(1, 0, 0.5, 0)
+					DROPDOWNTESTBtnTitle.Size = UDim2.new(1, -6, 1, 0)
+					DROPDOWNTESTBtnTitle.Font = Enum.Font.Gotham
+					DROPDOWNTESTBtnTitle.Text = tostring(opt)
+					DROPDOWNTESTBtnTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+					DROPDOWNTESTBtnTitle.TextSize = 12.000
+					DROPDOWNTESTBtnTitle.TextXAlignment = Enum.TextXAlignment.Left
+					DROPDOWNTESTBtnTitle.TextTransparency = 1
+					DROPDOWNTESTBtnTitle.ZIndex = 99
+
+					local DROPDOWNTESTBtnCorner = Instance.new("UICorner")
+					DROPDOWNTESTBtnCorner.CornerRadius = UDim.new(0, 4)
+					DROPDOWNTESTBtnCorner.Name = "DROPDOWNTESTBtnCorner"
+					DROPDOWNTESTBtnCorner.Parent = DROPDOWNTESTBtn
+					
+					DROPDOWNTESTBtn.MouseButton1Click:Connect(function()
+						if (pressed) then return end
+						pressed = true
+						DROPDOWNTESTSelected.Text = string.format(opt)
+						coroutine.wrap(cb)(opt)
+						toggle()
+						pressed = false
+					end)
+					DROPDOWNTESTBtn.MouseEnter:Connect(function()
+						game.TweenService:Create(DROPDOWNTESTBtn, TweenInfo.new(0, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundColor3 = Color3.fromRGB(107, 89, 222)}):Play()
+					end)
+					DROPDOWNTESTBtn.MouseLeave:Connect(function()
+						game.TweenService:Create(DROPDOWNTESTBtn, TweenInfo.new(0, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundColor3 = Color3.fromRGB(22, 20, 45)}):Play()
+					end)
+				end
+				
+				if side == 'Left' then
+					DROPDOWNTEST.Parent = Left
+				elseif side == 'Right' then
+					DROPDOWNTEST.Parent = Right
+				else
+					DROPDOWNTEST:Destroy()
+					print('please select a side for the ' .. text .. ' DROPDOWNTEST')
+				end
+			end
+			
+
 			---SEARCH BAR FUNCTION---
 			local function Refresh()
 				local entry = string.lower(SearchBox.Text)
@@ -2763,7 +3044,6 @@ function lib:Notify(title, desc, dur)
 		Notification:Destroy()
 	end)()
 end
-
 getgenv().library = lib
 return lib
 

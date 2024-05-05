@@ -2764,36 +2764,6 @@ function lib:Notify(title, desc, dur)
 		Notification:Destroy()
 	end)()
 end
-local Main = lib:Create('<font color="rgb(107, 89, 222)">VICE HUB</font>',  UDim2.new(0, 700, 0, 600), Enum.KeyCode.RightShift)
-local T2 = Main:Tab('LEGITBOT', 10063288907, 'Legitbot Options', 'Aimbot that tries to aim at opponents in the most humane way.')
-local T3 = Main:Tab('RAGEBOT', 10063358041, 'Ragebot Options', 'Aimbot that tries to kill opponents as quickly as possible.              <font color="rgb(255,0,0)"><b>USE AT OWN RISK</b></font> ')
-local T4 = Main:Tab('VISUAL', 10191671863, 'Visuals Customization', 'Allows you to customize entities and world.') 
-local T5 = Main:Tab('OTHERS', 10063472975, 'Other Settings', 'Misc options.') 
--- ========= SUB TABS ===============
-local LegitTab    = T2:SubTab('Aimbot       ', 10063461239) --local T2ST2 = T2:SubTab('Misc', 10063472975)
-local TriggerTab  = T2:SubTab('Trigger      ', 10063480247)
-local RageTab     = T3:SubTab('Ragebot      ', 10063461239) 
-local AntiAimTab  = T3:SubTab('Anti Aim      ', 12501131079)
-local MiscTab     = T5:SubTab('Main        ', 10063341801)
-local MiscTab2    = T5:SubTab('Misc        ', 10063341801)
-local VisualTab   = T4:SubTab('Entities       ', 10257728029)
-local WorldTab    = T4:SubTab('World        ', 10246075923)
-local ViewTab     = T4:SubTab('View         ', 10246507314)
-LegitTab:Label('Left','Label')
-LegitTab:Toggle('Left','test smth',true,function() end)
-local sexTable = {"Armor ESP","Testing ahh","vice is so hot","vicehub.cc suck","Ah", "Fuck", "Me", "Please"}
-LegitTab:Label('Right','Label')
-LegitTab:DROPDOWNTEST('Right', 'Showcase', {flag = "sex", list = sexTable, Type = 'Toggle'}, function(value)
-	print(value)
-end)
-LegitTab:Toggle('Left','Export Flags in a.json',false,function() end)
-LegitTab:Colorpicker('Left','Colorpicker', Color3.fromRGB(68,108,198), function(vvv)  rint("value is: " .. vvv) end)
---LegitTab:DROPDOWNTEST('Left','Dropdown', 'value', {"ok", "bye","nigger"}, function() end)
-LegitTab:Slider('Left','Slider', 10,1,1000,1, function(value) print(value) end)
---LegitTab:DROPDOWNTEST('Left','Hitscan Priority', 'Head', {"Head", "Torso"}, function() end)
-
-LegitTab:CounterLabel('Left','Allah yok', true)
-LegitTab:CounterLabel('Left','Rainbow.function[1]')
 getgenv().library = lib
 return lib
 
